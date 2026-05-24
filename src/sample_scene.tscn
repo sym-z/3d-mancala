@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://c0wr77kcmfrov"]
+
+[ext_resource type="ArrayMesh" uid="uid://unwuoqjwaq8o" path="res://board_mesh.tres" id="1_ohetr"]
+[ext_resource type="ArrayMesh" uid="uid://cq8owts5u1hvw" path="res://piece_mesh.tres" id="2_0pueg"]
+
+[node name="Node3D" type="Node3D" unique_id=202412583]
+
+[node name="BoardMesh" type="MeshInstance3D" parent="." unique_id=2120054666]
+transform = Transform3D(3.4896216, 0, 0, 0, 0.15154135, 0, 0, 0, 1, 0, 0, 0)
+mesh = ExtResource("1_ohetr")
+
+[node name="PieceMesh" type="MeshInstance3D" parent="." unique_id=1090492666]
+transform = Transform3D(0.175, 0, 0, 0, 0.175, 0, 0, 0, 0.175, -0.5695777, 0.48364103, 0.552125)
+mesh = ExtResource("2_0pueg")
