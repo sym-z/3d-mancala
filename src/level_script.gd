@@ -18,7 +18,7 @@ const TOTAL_BANKS : int = 13
 var selected_bank : int = 0
 
 
-const STARTING_AMT : int = 4
+const STARTING_AMT : int = 8
 var piece_scn : PackedScene = preload("uid://dx40hiqxmxc4x")
 func _ready():
 	arrow_pointer.global_position = p1_marker_banks[selected_bank].global_position
@@ -38,6 +38,7 @@ func fill_bank(bank_arr : Array[Marker3D]):
 			var piece_inst : RigidBody3D = piece_scn.instantiate()
 			bank.add_child(piece_inst)
 			piece_inst.global_position = bank.global_position
+			await get_tree().create_timer(0.2).timeout
 	pass
 #endregion
 
@@ -95,8 +96,9 @@ func choose_bank():
 					#TESTED
 					place_piece(p1_marker_home)
 				# OVERFLOW BACK TO P1
-				elif curr_bank > TOTAL_BANKS:
+				elif curr_bank >= TOTAL_BANKS:
 					print("OVERFLOW: " , curr_bank % TOTAL_BANKS)
+					#place_piece(p1_marker_banks[curr_bank])
 				# OVERFLOW INTO P2
 				elif curr_bank > NUM_BANKS:
 					place_piece(p2_marker_banks[curr_bank % (NUM_BANKS+1)])
@@ -107,7 +109,9 @@ func choose_bank():
 				# For end turn logic
 				final_bank_num = selected_bank + i
 			print("SELECTED BANK: ", selected_bank)
-			print("FINAL BANK: ", final_bank_num % (NUM_BANKS+1))
+			#print("FINAL BANK Local: ", final_bank_num % (NUM_BANKS+1))
+			print("Final Bank Global: ", final_bank_num % (TOTAL_BANKS))
+			#print("Final Bank Local: ", (final_bank_num % (TOTAL_BANKS)) % NUM_BANKS - 1)
 		pass
 	else:
 		print("NO PIECES IN SELECTED BANK")

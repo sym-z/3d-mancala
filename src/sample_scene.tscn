@@ -36,6 +36,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5695777, 0.48364103, 0.552
 visible = false
 
 [node name="Placement Markers" type="Node3D" parent="." unique_id=22633479]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.51, 0)
 
 [node name="P1_1" type="Marker3D" parent="Placement Markers" unique_id=26367012]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0358663, 1, 0.5660628)
