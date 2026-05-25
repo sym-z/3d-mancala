@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://dx40hiqxmxc4x"]
+
+[ext_resource type="ArrayMesh" uid="uid://cq8owts5u1hvw" path="res://piece_mesh.tres" id="1_6k0fr"]
+[ext_resource type="Texture2D" uid="uid://dxulkjypnhb1d" path="res://red_mancala.png" id="2_jui6c"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ohetr"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_0pueg"]
+radius = 0.0717823
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_440e6"]
+albedo_texture = ExtResource("2_jui6c")
+metallic_specular = 1.0
+roughness = 0.0
+clearcoat_enabled = true
+clearcoat_roughness = 0.0
+refraction_enabled = true
+refraction_scale = 0.95
+
+[node name="GamePiece" type="RigidBody3D" unique_id=1529533771]
+physics_material_override = SubResource("PhysicsMaterial_ohetr")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=555633486]
+shape = SubResource("SphereShape3D_0pueg")
+debug_color = Color(0, 0.5921569, 0.7490196, 1)
+
+[node name="PieceMesh" type="MeshInstance3D" parent="." unique_id=725674864]
+transform = Transform3D(0.175, 0, 0, 0, 0.175, 0, 0, 0, 0.175, 0, 0, 0)
+mesh = ExtResource("1_6k0fr")
+surface_material_override/0 = SubResource("StandardMaterial3D_440e6")
