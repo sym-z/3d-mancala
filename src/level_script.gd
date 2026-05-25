@@ -18,8 +18,10 @@ const TOTAL_BANKS : int = 13
 var selected_bank : int = 0
 
 
-const STARTING_AMT : int = 8
+const STARTING_AMT : int = 4
 var piece_scn : PackedScene = preload("uid://dx40hiqxmxc4x")
+
+var num_players_ready : int = 0
 func _ready():
 	arrow_pointer.global_position = p1_marker_banks[selected_bank].global_position
 	board_setup()
@@ -39,6 +41,7 @@ func fill_bank(bank_arr : Array[Marker3D]):
 			bank.add_child(piece_inst)
 			piece_inst.global_position = bank.global_position
 			await get_tree().create_timer(0.2).timeout
+	num_players_ready += 1
 	pass
 #endregion
 
@@ -48,7 +51,7 @@ func _input(event):
 		move_left()
 	if event.is_action_pressed("ui_right"):
 		move_right()
-	if event.is_action_pressed("ui_select"):
+	if event.is_action_pressed("ui_select") and num_players_ready == 2:
 		choose_bank()
 
 func move_left():
@@ -80,39 +83,53 @@ func choose_bank():
 		parent = p1_marker_banks[selected_bank]
 	else:
 		parent = p2_marker_banks[selected_bank]
+	# Identify number of pieces in selected bank
 	var piece_amt : int = parent.get_child_count()
+	
 	if piece_amt > 0:
+		
 		# Delete all children
 		for piece in parent.get_children():
 			piece.call_deferred("queue_free")
+		
 		# Iterate through, placing one piece per hop, remembering to place one piece in the current player's bank
 		# Keep track of final bank
 		var final_bank_num : int = -1
-		#TODO ADD AWAIT TIMER
+		
 		if curr_turn == TURN.ONE:
 			for i in range(1,piece_amt+1):
-				var curr_bank = selected_bank + i
-				if curr_bank == NUM_BANKS:
-					#TESTED
+				var global_bank = (selected_bank + i) % TOTAL_BANKS
+				if global_bank == NUM_BANKS:
 					place_piece(p1_marker_home)
-				# OVERFLOW BACK TO P1
-				elif curr_bank >= TOTAL_BANKS:
-					print("OVERFLOW: " , curr_bank % TOTAL_BANKS)
-					#place_piece(p1_marker_banks[curr_bank])
-				# OVERFLOW INTO P2
-				elif curr_bank > NUM_BANKS:
-					place_piece(p2_marker_banks[curr_bank % (NUM_BANKS+1)])
+				elif global_bank > NUM_BANKS:
+					place_piece(p2_marker_banks[(global_bank % NUM_BANKS)-1])
 				else:
-					#TESTED
-					place_piece(p1_marker_banks[curr_bank])
+					place_piece(p1_marker_banks[global_bank])
+				final_bank_num = global_bank
 				await get_tree().create_timer(0.5).timeout
-				# For end turn logic
-				final_bank_num = selected_bank + i
+		
+		else:
+			#TODO TEST THIS ONCE YOU HAVE TURN SWITCHING
+			for i in range(1,piece_amt+1):
+				var global_bank = (selected_bank + i) % TOTAL_BANKS
+				if global_bank == NUM_BANKS:
+					place_piece(p2_marker_home)
+				elif global_bank > NUM_BANKS:
+					place_piece(p1_marker_banks[(global_bank % NUM_BANKS)-1])
+				else:
+					place_piece(p2_marker_banks[global_bank])
+				final_bank_num = global_bank
+				await get_tree().create_timer(0.5).timeout
+			
+			if final_bank_num == NUM_BANKS:
+				print("EXTRA TURN")
+				#TODO HANDLE EXTRA TURN LOGIC
+			
+			print("TURN: ", curr_turn)
 			print("SELECTED BANK: ", selected_bank)
-			#print("FINAL BANK Local: ", final_bank_num % (NUM_BANKS+1))
-			print("Final Bank Global: ", final_bank_num % (TOTAL_BANKS))
-			#print("Final Bank Local: ", (final_bank_num % (TOTAL_BANKS)) % NUM_BANKS - 1)
-		pass
+			print("Final Bank Global: ", final_bank_num)
+			
+			#TODO: CAPTURE CHECK
 	else:
 		print("NO PIECES IN SELECTED BANK")
 
