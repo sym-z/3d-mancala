@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dx40hiqxmxc4x"]
 
 [ext_resource type="ArrayMesh" uid="uid://cq8owts5u1hvw" path="res://piece_mesh.tres" id="1_6k0fr"]
+[ext_resource type="Script" uid="uid://c05vpl7j8gae3" path="res://scenes/game_piece.gd" id="1_440e6"]
 [ext_resource type="Texture2D" uid="uid://dxulkjypnhb1d" path="res://red_mancala.png" id="2_jui6c"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ohetr"]
@@ -17,8 +18,10 @@ clearcoat_roughness = 0.0
 refraction_enabled = true
 refraction_scale = 0.95
 
-[node name="GamePiece" type="RigidBody3D" unique_id=1529533771]
+[node name="GamePiece" type="RigidBody3D" unique_id=1529533771 node_paths=PackedStringArray("mesh")]
 physics_material_override = SubResource("PhysicsMaterial_ohetr")
+script = ExtResource("1_440e6")
+mesh = NodePath("PieceMesh")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=555633486]
 shape = SubResource("SphereShape3D_0pueg")

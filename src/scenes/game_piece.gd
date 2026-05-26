@@ -1,0 +1,18 @@
+extends RigidBody3D
+
+@export var mesh : MeshInstance3D
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	var new_material : StandardMaterial3D = StandardMaterial3D.new()
+	new_material.albedo_color = Color(randf_range(0,1.0),randf_range(0,1.0),randf_range(0,1.0),1.0)
+	new_material.metallic_specular = 1.0
+	new_material.roughness = 0.0
+	new_material.clearcoat_roughness = 0.0
+	new_material.refraction_scale = 0.95
+	mesh.material_override = new_material
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
