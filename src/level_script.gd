@@ -17,15 +17,18 @@ extends Node3D
 
 enum TURN {ONE=1,TWO=2}
 var curr_turn : TURN = TURN.ONE
-const NUM_BANKS : int = 6
-const TOTAL_BANKS : int = 13
-var selected_bank : int = 0
-
 
 const STARTING_AMT : int = 4
+const NUM_BANKS : int = 6
+const TOTAL_BANKS : int = 13
+
+var selected_bank : int = 0
+
 var piece_scn : PackedScene = preload("uid://dx40hiqxmxc4x")
 
 var game_ready : bool = false
+var p1_win : bool = false
+var p2_win : bool = false
 
 @export_category("Game Modifiers")
 @export var spread_delay : float = 0.5
@@ -49,7 +52,6 @@ func fill_bank(bank_arr : Array[Marker3D]):
 			piece_inst.global_position = bank.global_position
 			await get_tree().create_timer(0.2).timeout
 #endregion
-
 #region Input Handling
 func _input(event):
 	if event.is_action_pressed("ui_left"):
@@ -81,9 +83,11 @@ func set_selection(bank_num : int):
 	else:
 		arrow_pointer.global_position = p2_marker_banks[bank_num].global_position
 #endregion
-
+#region Game State Modification
 func swap_turn():
 	await get_tree().create_timer(spread_delay * 2).timeout
+	#TODO: CHECK GAME STATE END
+	check_endgame()
 	if curr_turn == TURN.ONE:
 		curr_turn = TURN.TWO
 		p1_cam.current = false
@@ -98,7 +102,53 @@ func swap_turn():
 	# Change back end to select new bank
 	selected_bank = 0
 	
+func check_endgame():
+	var p1_pieces : int = get_p1_total_pieces()
+	var p2_pieces : int = get_p2_total_pieces()
+	if p1_pieces == 0 or p2_pieces == 0:
+		# Transfer all pieces from the other side to the correct home
+		if p1_pieces != 0:
+			await move_to_home(p1_marker_banks, p1_marker_home)
+		else:
+			await move_to_home(p2_marker_banks, p2_marker_home)
+		# Identify who has more pieces in home
+		check_winner()
+		# End Game
+		#TODO: Win behavior
+		print("P1 Win: ", p1_win, " P2 Win: ", p2_win)
 
+func get_p1_total_pieces() -> int:
+	var total : int = 0
+	for bank in p1_marker_banks:
+		for piece in bank.get_children():
+			total += 1
+	return total
+
+func get_p2_total_pieces() -> int:
+	var total : int = 0
+	for bank in p2_marker_banks:
+		for piece in bank.get_children():
+			total += 1
+	return total
+
+func move_to_home(banks : Array[Marker3D], home : Marker3D):
+	for bank in banks:
+		for piece in bank.get_children():
+			piece.call_deferred("queue_free")
+			place_piece(home)
+			await get_tree().create_timer(spread_delay).timeout
+
+func check_winner():
+	if p1_marker_home.get_child_count() == p2_marker_home.get_child_count():
+		p1_win = true
+		p2_win = true
+	elif p1_marker_home.get_child_count() > p2_marker_home.get_child_count():
+		p1_win = true
+		p2_win = false
+	else:
+		p1_win = false
+		p2_win = true
+#endregion
 #region Bank Choice
 func choose_bank():
 	var parent : Marker3D
@@ -200,3 +250,4 @@ func capture_check(bank : Marker3D, index : int):
 		else:
 			place_piece(p2_marker_home)
 		await get_tree().create_timer(spread_delay).timeout
+#endregion
