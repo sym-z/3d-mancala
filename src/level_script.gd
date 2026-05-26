@@ -31,11 +31,15 @@ var game_ready : bool = false
 var p1_win : bool = false
 var p2_win : bool = false
 
+
+
 @export_category("Game Modifiers")
 @export var spread_delay : float = 0.5
 func _ready():
 	arrow_pointer.global_position = p1_marker_banks[selected_bank].global_position
+	arrow_pointer.visible = false
 	await board_setup()
+	arrow_pointer.visible = true
 	game_ready = true
 	allow_input = true
 
@@ -55,13 +59,15 @@ func fill_bank(bank_arr : Array[Marker3D]):
 #endregion
 #region Input Handling
 func _input(event):
-	if event.is_action_pressed("ui_left"):
+	if event.is_action_pressed("ui_left") and allow_input:
 		move_left()
-	if event.is_action_pressed("ui_right"):
+	if event.is_action_pressed("ui_right") and allow_input:
 		move_right()
 	if event.is_action_pressed("ui_select") and game_ready and allow_input:
-		choose_bank()
-		
+		arrow_pointer.visible = false
+		allow_input = false
+		await choose_bank()
+		arrow_pointer.visible = true
 
 func move_left():
 	#TODO: Check turn
@@ -103,6 +109,7 @@ func swap_turn():
 	set_selection(0)
 	# Change back end to select new bank
 	selected_bank = 0
+	allow_input = true
 	
 func check_endgame():
 	var p1_pieces : int = get_p1_total_pieces()
@@ -155,6 +162,7 @@ func check_winner():
 #endregion
 #region Bank Choice
 func choose_bank():
+	allow_input = false
 	var parent : Marker3D
 	# Identify the current turn
 	if curr_turn == TURN.ONE:
@@ -203,6 +211,7 @@ func choose_bank():
 		# Landed in own Home
 		if final_bank_num == NUM_BANKS:
 			print("EXTRA TURN")
+			allow_input = true
 			#TODO HANDLE EXTRA TURN LOGIC
 		# Landed on own side
 		# You can only capture if you land on "your" side and that is the only piece in there now
