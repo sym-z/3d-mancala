@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ms4b8vqdfki"
-path.s3tc="res://.godot/imported/arrow.png-9a52328c9c8f79a188b7fabb13b1f3fc.s3tc.ctex"
+uid="uid://nf6tvdgibavx"
+path.s3tc="res://.godot/imported/yellow_board.png-97f0c457e7f3463da09fb61b9ec4d66c.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://arrow.png"
-dest_files=["res://.godot/imported/arrow.png-9a52328c9c8f79a188b7fabb13b1f3fc.s3tc.ctex"]
+source_file="res://assets/blends/yellow_board.png"
+dest_files=["res://.godot/imported/yellow_board.png-97f0c457e7f3463da09fb61b9ec4d66c.s3tc.ctex"]
 
 [params]
 

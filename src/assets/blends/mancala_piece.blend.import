@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://rt1gh8h2knvl"
-path="res://.godot/imported/mancala_piece.blend-5984e96f4ec6b440bc6ce06197e47d72.scn"
+path="res://.godot/imported/mancala_piece.blend-9ca7d2514cae809083570e7d96100522.scn"
 
 [deps]
 
-source_file="res://mancala_piece.blend"
-dest_files=["res://.godot/imported/mancala_piece.blend-5984e96f4ec6b440bc6ce06197e47d72.scn"]
+source_file="res://assets/blends/mancala_piece.blend"
+dest_files=["res://.godot/imported/mancala_piece.blend-9ca7d2514cae809083570e7d96100522.scn"]
 
 [params]
 
@@ -45,7 +45,7 @@ _subresources={
 "generate/shadow_meshes": 0,
 "lods/normal_merge_angle": 20.0,
 "save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://piece_mesh.tres",
+"save_to_file/fallback_path": "res://scenes/piece_mesh.tres",
 "save_to_file/path": "uid://cnhvsmxi3ybcv"
 }
 }

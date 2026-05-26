@@ -31,7 +31,8 @@ var game_ready : bool = false
 var p1_win : bool = false
 var p2_win : bool = false
 
-
+signal turn_change
+signal extra_turn
 
 @export_category("Game Modifiers")
 @export var spread_delay : float = 0.5
@@ -55,7 +56,7 @@ func fill_bank(bank_arr : Array[Marker3D]):
 			var piece_inst : RigidBody3D = piece_scn.instantiate()
 			bank.add_child(piece_inst)
 			piece_inst.global_position = Vector3(bank.global_position.x,bank.global_position.y, bank.global_position.z + randf_range(-piece_inst.pos_variation_magnitude, piece_inst.pos_variation_magnitude))
-			await get_tree().create_timer(0.2).timeout
+			await get_tree().create_timer(spread_delay/2).timeout
 #endregion
 #region Input Handling
 func _input(event):
@@ -110,6 +111,7 @@ func swap_turn():
 	# Change back end to select new bank
 	selected_bank = 0
 	allow_input = true
+	turn_change.emit()
 	
 func check_endgame():
 	var p1_pieces : int = get_p1_total_pieces()
@@ -211,6 +213,7 @@ func choose_bank():
 		# Landed in own Home
 		if final_bank_num == NUM_BANKS:
 			print("EXTRA TURN")
+			extra_turn.emit()
 			allow_input = true
 			#TODO HANDLE EXTRA TURN LOGIC
 		# Landed on own side
@@ -255,7 +258,7 @@ func capture_check(bank : Marker3D, index : int):
 				place_piece(p1_marker_home)
 			else:
 				place_piece(p2_marker_home)
-			await get_tree().create_timer(spread_delay).timeout
+			await get_tree().create_timer(spread_delay/2).timeout
 		opposite_bank.set_manual.emit(0)
 		# Place remaining piece
 		var last_piece = bank.get_child(0)
@@ -265,5 +268,5 @@ func capture_check(bank : Marker3D, index : int):
 		else:
 			place_piece(p2_marker_home)
 		bank.set_manual.emit(0)
-		await get_tree().create_timer(spread_delay).timeout
+		await get_tree().create_timer(spread_delay/2).timeout
 #endregion
