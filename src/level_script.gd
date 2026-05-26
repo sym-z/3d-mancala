@@ -11,7 +11,11 @@ extends Node3D
 @export_category("UI")
 @export var arrow_pointer : Sprite3D
 
-enum TURN {ONE,TWO}
+@export_category("Cameras")
+@export var p1_cam : Camera3D 
+@export var p2_cam : Camera3D
+
+enum TURN {ONE=1,TWO=2}
 var curr_turn : TURN = TURN.ONE
 const NUM_BANKS : int = 6
 const TOTAL_BANKS : int = 13
@@ -21,19 +25,22 @@ var selected_bank : int = 0
 const STARTING_AMT : int = 4
 var piece_scn : PackedScene = preload("uid://dx40hiqxmxc4x")
 
-var num_players_ready : int = 0
+var game_ready : bool = false
+
+@export_category("Game Modifiers")
+@export var spread_delay : float = 0.5
 func _ready():
 	arrow_pointer.global_position = p1_marker_banks[selected_bank].global_position
-	board_setup()
+	await board_setup()
+	game_ready = true
 
 
 #region Game Setup
 func board_setup():
 	# Fill each players side with STARTING_AMT pieces.
 	fill_bank(p1_marker_banks)
-	fill_bank(p2_marker_banks)
-			
-	pass
+	await fill_bank(p2_marker_banks)
+	
 func fill_bank(bank_arr : Array[Marker3D]):
 	for bank in bank_arr:
 		for i in range(STARTING_AMT):
@@ -41,8 +48,6 @@ func fill_bank(bank_arr : Array[Marker3D]):
 			bank.add_child(piece_inst)
 			piece_inst.global_position = bank.global_position
 			await get_tree().create_timer(0.2).timeout
-	num_players_ready += 1
-	pass
 #endregion
 
 #region Input Handling
@@ -51,7 +56,7 @@ func _input(event):
 		move_left()
 	if event.is_action_pressed("ui_right"):
 		move_right()
-	if event.is_action_pressed("ui_select") and num_players_ready == 2:
+	if event.is_action_pressed("ui_select") and game_ready:
 		choose_bank()
 
 func move_left():
@@ -71,8 +76,28 @@ func move_right():
 		set_selection(selected_bank)
 
 func set_selection(bank_num : int):
-	arrow_pointer.global_position = p1_marker_banks[bank_num].global_position
+	if curr_turn == TURN.ONE:
+		arrow_pointer.global_position = p1_marker_banks[bank_num].global_position
+	else:
+		arrow_pointer.global_position = p2_marker_banks[bank_num].global_position
 #endregion
+
+func swap_turn():
+	await get_tree().create_timer(spread_delay * 2).timeout
+	if curr_turn == TURN.ONE:
+		curr_turn = TURN.TWO
+		p1_cam.current = false
+		p2_cam.current = true
+	else:
+		curr_turn = TURN.ONE
+		p1_cam.current = true
+		p2_cam.current = false
+
+	# Change arrow to be new selection
+	set_selection(0)
+	# Change back end to select new bank
+	selected_bank = 0
+	
 
 #region Bank Choice
 func choose_bank():
@@ -106,7 +131,7 @@ func choose_bank():
 				else:
 					place_piece(p1_marker_banks[global_bank])
 				final_bank_num = global_bank
-				await get_tree().create_timer(0.5).timeout
+				await get_tree().create_timer(spread_delay).timeout
 		
 		else:
 			#TODO TEST THIS ONCE YOU HAVE TURN SWITCHING
@@ -119,23 +144,59 @@ func choose_bank():
 				else:
 					place_piece(p2_marker_banks[global_bank])
 				final_bank_num = global_bank
-				await get_tree().create_timer(0.5).timeout
+				await get_tree().create_timer(spread_delay).timeout
+		
+		# Landed in own Home
+		if final_bank_num == NUM_BANKS:
+			print("EXTRA TURN")
+			#TODO HANDLE EXTRA TURN LOGIC
+		# Landed on own side
+		# You can only capture if you land on "your" side and that is the only piece in there now
+		elif final_bank_num < NUM_BANKS:
+			if curr_turn == TURN.ONE and p1_marker_banks[final_bank_num].get_child_count() == 1:
+				await capture_check(p1_marker_banks[final_bank_num], final_bank_num)
+			elif curr_turn == TURN.TWO and p2_marker_banks[final_bank_num].get_child_count() == 1:
+				await capture_check(p2_marker_banks[final_bank_num], final_bank_num)
+			await swap_turn()
+		# Landed in other player's side
+		else:
+			await swap_turn()
 			
-			if final_bank_num == NUM_BANKS:
-				print("EXTRA TURN")
-				#TODO HANDLE EXTRA TURN LOGIC
 			
-			print("TURN: ", curr_turn)
-			print("SELECTED BANK: ", selected_bank)
-			print("Final Bank Global: ", final_bank_num)
-			
-			#TODO: CAPTURE CHECK
+		print("PLAYER ", curr_turn, " TURN DONE")
+		print("SELECTED BANK: ", selected_bank)
+		print("Final Bank Global: ", final_bank_num)
 	else:
 		print("NO PIECES IN SELECTED BANK")
 
 # Similarly to fill banks, used when iterating through banks after choice.
-
 func place_piece(bank: Marker3D):
 	var piece_inst : RigidBody3D = piece_scn.instantiate()
 	bank.add_child(piece_inst)
 	piece_inst.global_position = bank.global_position
+
+func capture_check(bank : Marker3D, index : int):
+	print("CALLED")
+	# Since function was called with await, these internal awaits for the placement will carry out before the function returns to caller
+	var opposite_bank : Marker3D
+	if curr_turn == TURN.ONE:
+		opposite_bank = p2_marker_banks[5-index]
+	else:
+		opposite_bank = p1_marker_banks[5-index]
+	# Transfer pieces
+	if opposite_bank.get_child_count() != 0:
+		for piece in opposite_bank.get_children():
+			piece.call_deferred("queue_free")
+			if curr_turn == TURN.ONE:
+				place_piece(p1_marker_home)
+			else:
+				place_piece(p2_marker_home)
+			await get_tree().create_timer(spread_delay).timeout
+		# Place remaining piece
+		var last_piece = bank.get_child(0)
+		last_piece.call_deferred("queue_free")
+		if curr_turn == TURN.ONE:
+			place_piece(p1_marker_home)
+		else:
+			place_piece(p2_marker_home)
+		await get_tree().create_timer(spread_delay).timeout

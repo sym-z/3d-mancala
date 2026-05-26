@@ -12,18 +12,26 @@ ambient_light_source = 3
 
 [sub_resource type="Compositor" id="Compositor_id4ae"]
 
-[node name="Sample Level" type="Node3D" unique_id=202412583 node_paths=PackedStringArray("p1_marker_banks", "p2_marker_banks", "p1_marker_home", "p2_marker_home", "arrow_pointer")]
+[node name="Sample Level" type="Node3D" unique_id=202412583 node_paths=PackedStringArray("p1_marker_banks", "p2_marker_banks", "p1_marker_home", "p2_marker_home", "arrow_pointer", "p1_cam", "p2_cam")]
 script = ExtResource("1_id4ae")
 p1_marker_banks = [NodePath("Placement Markers/P1_1"), NodePath("Placement Markers/P1_2"), NodePath("Placement Markers/P1_3"), NodePath("Placement Markers/P1_4"), NodePath("Placement Markers/P1_5"), NodePath("Placement Markers/P1_6")]
 p2_marker_banks = [NodePath("Placement Markers/P2_1"), NodePath("Placement Markers/P2_2"), NodePath("Placement Markers/P2_3"), NodePath("Placement Markers/P2_4"), NodePath("Placement Markers/P2_5"), NodePath("Placement Markers/P2_6")]
 p1_marker_home = NodePath("Placement Markers/P1_H")
 p2_marker_home = NodePath("Placement Markers/P2_H")
 arrow_pointer = NodePath("Selection Arrow")
+p1_cam = NodePath("P1 Cam")
+p2_cam = NodePath("P2 Cam")
 
 [node name="Board" parent="." unique_id=968892763 instance=ExtResource("1_ohetr")]
 
-[node name="Camera3D" type="Camera3D" parent="." unique_id=155083364]
+[node name="P1 Cam" type="Camera3D" parent="." unique_id=155083364]
 transform = Transform3D(1, 0, 0, 0, 0.39576986, 0.91834974, 0, -0.91834974, 0.39576986, 0, 2.9886255, 1.7312129)
+environment = SubResource("Environment_ohetr")
+attributes = SubResource("CameraAttributesPractical_0pueg")
+compositor = SubResource("Compositor_id4ae")
+
+[node name="P2 Cam" type="Camera3D" parent="." unique_id=1002071270]
+transform = Transform3D(-0.99999994, 8.029314e-08, -3.457969e-08, 0, 0.39554554, 0.9184465, 8.742277e-08, 0.9184465, -0.39554554, 0, 2.9886255, -1.1855042)
 environment = SubResource("Environment_ohetr")
 attributes = SubResource("CameraAttributesPractical_0pueg")
 compositor = SubResource("Compositor_id4ae")
