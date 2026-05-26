@@ -1,6 +1,8 @@
 extends RigidBody3D
 
 @export var mesh : MeshInstance3D
+## How much random variation is there between spawn positions
+@export var pos_variation_magnitude : float = 0.1
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var new_material : StandardMaterial3D = StandardMaterial3D.new()

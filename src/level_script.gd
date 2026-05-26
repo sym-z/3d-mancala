@@ -49,7 +49,7 @@ func fill_bank(bank_arr : Array[Marker3D]):
 		for i in range(STARTING_AMT):
 			var piece_inst : RigidBody3D = piece_scn.instantiate()
 			bank.add_child(piece_inst)
-			piece_inst.global_position = bank.global_position
+			piece_inst.global_position = Vector3(bank.global_position.x,bank.global_position.y, bank.global_position.z + randf_range(-piece_inst.pos_variation_magnitude, piece_inst.pos_variation_magnitude))
 			await get_tree().create_timer(0.2).timeout
 #endregion
 #region Input Handling
@@ -60,6 +60,7 @@ func _input(event):
 		move_right()
 	if event.is_action_pressed("ui_select") and game_ready:
 		choose_bank()
+		
 
 func move_left():
 	#TODO: Check turn
@@ -136,7 +137,9 @@ func move_to_home(banks : Array[Marker3D], home : Marker3D):
 		for piece in bank.get_children():
 			piece.call_deferred("queue_free")
 			place_piece(home)
+			bank.bank_updated.emit()
 			await get_tree().create_timer(spread_delay).timeout
+		bank.set_manual.emit(0)
 
 func check_winner():
 	if p1_marker_home.get_child_count() == p2_marker_home.get_child_count():
@@ -165,8 +168,8 @@ func choose_bank():
 		
 		# Delete all children
 		for piece in parent.get_children():
-			piece.call_deferred("queue_free")
-		
+			piece.queue_free()
+		parent.set_manual.emit(0)
 		# Iterate through, placing one piece per hop, remembering to place one piece in the current player's bank
 		# Keep track of final bank
 		var final_bank_num : int = -1
@@ -212,10 +215,9 @@ func choose_bank():
 		else:
 			await swap_turn()
 			
-			
-		print("PLAYER ", curr_turn, " TURN DONE")
-		print("SELECTED BANK: ", selected_bank)
-		print("Final Bank Global: ", final_bank_num)
+		#print("PLAYER ", curr_turn, " TURN DONE")
+		#print("SELECTED BANK: ", selected_bank)
+		#print("Final Bank Global: ", final_bank_num)
 	else:
 		print("NO PIECES IN SELECTED BANK")
 
@@ -223,7 +225,8 @@ func choose_bank():
 func place_piece(bank: Marker3D):
 	var piece_inst : RigidBody3D = piece_scn.instantiate()
 	bank.add_child(piece_inst)
-	piece_inst.global_position = bank.global_position
+	piece_inst.global_position = Vector3(bank.global_position.x,bank.global_position.y, bank.global_position.z + randf_range(-piece_inst.pos_variation_magnitude, piece_inst.pos_variation_magnitude))
+	bank.bank_updated.emit()
 
 func capture_check(bank : Marker3D, index : int):
 	print("CALLED")
@@ -237,11 +240,13 @@ func capture_check(bank : Marker3D, index : int):
 	if opposite_bank.get_child_count() != 0:
 		for piece in opposite_bank.get_children():
 			piece.call_deferred("queue_free")
+			opposite_bank.bank_updated.emit()
 			if curr_turn == TURN.ONE:
 				place_piece(p1_marker_home)
 			else:
 				place_piece(p2_marker_home)
 			await get_tree().create_timer(spread_delay).timeout
+		opposite_bank.set_manual.emit(0)
 		# Place remaining piece
 		var last_piece = bank.get_child(0)
 		last_piece.call_deferred("queue_free")
@@ -249,5 +254,6 @@ func capture_check(bank : Marker3D, index : int):
 			place_piece(p1_marker_home)
 		else:
 			place_piece(p2_marker_home)
+		bank.set_manual.emit(0)
 		await get_tree().create_timer(spread_delay).timeout
 #endregion

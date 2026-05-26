@@ -3,7 +3,9 @@
 [ext_resource type="Script" uid="uid://co5dbnn0hdls8" path="res://level_script.gd" id="1_id4ae"]
 [ext_resource type="PackedScene" uid="uid://cqqhmju2jlelh" path="res://scenes/board.tscn" id="1_ohetr"]
 [ext_resource type="PackedScene" uid="uid://dx40hiqxmxc4x" path="res://scenes/game_piece.tscn" id="2_0pueg"]
+[ext_resource type="Script" uid="uid://b3hl5psd3m3ob" path="res://placement_marker.gd" id="4_pvypo"]
 [ext_resource type="Texture2D" uid="uid://ms4b8vqdfki" path="res://arrow.png" id="4_sfoqk"]
+[ext_resource type="PackedScene" uid="uid://ckyorgxr70rcw" path="res://scenes/bank_label.tscn" id="5_sfoqk"]
 
 [sub_resource type="Environment" id="Environment_ohetr"]
 ambient_light_source = 3
@@ -48,46 +50,121 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.51, 0)
 
 [node name="P1_1" type="Marker3D" parent="Placement Markers" unique_id=26367012]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0358663, 1, 0.5660628)
+script = ExtResource("4_pvypo")
 
 [node name="P1_2" type="Marker3D" parent="Placement Markers" unique_id=1211023742]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2893002, 1, 0.5660628)
+script = ExtResource("4_pvypo")
 
 [node name="P1_3" type="Marker3D" parent="Placement Markers" unique_id=1488861513]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.57120466, 1, 0.5660628)
+script = ExtResource("4_pvypo")
 
 [node name="P1_4" type="Marker3D" parent="Placement Markers" unique_id=867313167]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5518079, 1, 0.5660628)
+script = ExtResource("4_pvypo")
 
 [node name="P1_5" type="Marker3D" parent="Placement Markers" unique_id=1008944792]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.273067, 1, 0.5660628)
+script = ExtResource("4_pvypo")
 
 [node name="P1_6" type="Marker3D" parent="Placement Markers" unique_id=875872734]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9753449, 1, 0.5660628)
+script = ExtResource("4_pvypo")
 
 [node name="P1_H" type="Marker3D" parent="Placement Markers" unique_id=1526196415]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6997674, 1, -0.0001885891)
+script = ExtResource("4_pvypo")
 
 [node name="P2_1" type="Marker3D" parent="Placement Markers" unique_id=4533112]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9753454, 1, -0.5126619)
+script = ExtResource("4_pvypo")
 
 [node name="P2_2" type="Marker3D" parent="Placement Markers" unique_id=1649694340]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2699034, 1, -0.5126619)
+script = ExtResource("4_pvypo")
 
 [node name="P2_3" type="Marker3D" parent="Placement Markers" unique_id=235128266]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.53915405, 1, -0.5126619)
+script = ExtResource("4_pvypo")
 
 [node name="P2_4" type="Marker3D" parent="Placement Markers" unique_id=966439575]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5743685, 1, -0.5126619)
+script = ExtResource("4_pvypo")
 
 [node name="P2_5" type="Marker3D" parent="Placement Markers" unique_id=1117528429]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2893004, 1, -0.5126619)
+script = ExtResource("4_pvypo")
 
 [node name="P2_6" type="Marker3D" parent="Placement Markers" unique_id=1390524248]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0105593, 1, -0.5126619)
+script = ExtResource("4_pvypo")
 
 [node name="P2_H" type="Marker3D" parent="Placement Markers" unique_id=873803096]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.747635, 1, -0.0001885891)
+script = ExtResource("4_pvypo")
 
 [node name="Selection Arrow" type="Sprite3D" parent="." unique_id=1875995472]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 1.1056426, 0)
+billboard = 1
 texture = ExtResource("4_sfoqk")
+
+[node name="Bank Labels" type="Node3D" parent="." unique_id=846181313]
+
+[node name="P1_1" parent="Bank Labels" unique_id=554239070 node_paths=PackedStringArray("bank_reference") instance=ExtResource("5_sfoqk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.931565, 0.33497983, 1.0933871)
+bank_reference = NodePath("../../Placement Markers/P1_1")
+
+[node name="P1_2" parent="Bank Labels" unique_id=1778548124 node_paths=PackedStringArray("bank_reference") instance=ExtResource("5_sfoqk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2309136, 0.33497983, 1.0933871)
+bank_reference = NodePath("../../Placement Markers/P1_2")
+
+[node name="P1_3" parent="Bank Labels" unique_id=912732546 node_paths=PackedStringArray("bank_reference") instance=ExtResource("5_sfoqk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5519172, 0.33497983, 1.0933871)
+bank_reference = NodePath("../../Placement Markers/P1_3")
+
+[node name="P1_4" parent="Bank Labels" unique_id=239804432 node_paths=PackedStringArray("bank_reference") instance=ExtResource("5_sfoqk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5175233, 0.33497983, 1.0933871)
+bank_reference = NodePath("../../Placement Markers/P1_4")
+
+[node name="P1_5" parent="Bank Labels" unique_id=289642587 node_paths=PackedStringArray("bank_reference") instance=ExtResource("5_sfoqk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2094197, 0.33497983, 1.0933871)
+bank_reference = NodePath("../../Placement Markers/P1_5")
+
+[node name="P1_6" parent="Bank Labels" unique_id=1428920457 node_paths=PackedStringArray("bank_reference") instance=ExtResource("5_sfoqk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8902476, 0.33497983, 1.0933871)
+bank_reference = NodePath("../../Placement Markers/P1_6")
+
+[node name="P1_H" parent="Bank Labels" unique_id=518989739 node_paths=PackedStringArray("bank_reference") instance=ExtResource("5_sfoqk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.8908675, 0.33497983, 0.0947777)
+text = "0"
+bank_reference = NodePath("../../Placement Markers/P1_H")
+
+[node name="P2_1" parent="Bank Labels" unique_id=904960078 node_paths=PackedStringArray("bank_reference") instance=ExtResource("5_sfoqk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8646576, 0.33497983, -0.92918444)
+bank_reference = NodePath("../../Placement Markers/P2_1")
+
+[node name="P2_2" parent="Bank Labels" unique_id=901654719 node_paths=PackedStringArray("bank_reference") instance=ExtResource("5_sfoqk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1908736, 0.33497983, -0.92918444)
+bank_reference = NodePath("../../Placement Markers/P2_2")
+
+[node name="P2_3" parent="Bank Labels" unique_id=1620592289 node_paths=PackedStringArray("bank_reference") instance=ExtResource("5_sfoqk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5246377, 0.33497983, -0.92918444)
+bank_reference = NodePath("../../Placement Markers/P2_3")
+
+[node name="P2_4" parent="Bank Labels" unique_id=759428942 node_paths=PackedStringArray("bank_reference") instance=ExtResource("5_sfoqk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.54083765, 0.33497983, -0.92918444)
+bank_reference = NodePath("../../Placement Markers/P2_4")
+
+[node name="P2_5" parent="Bank Labels" unique_id=589992565 node_paths=PackedStringArray("bank_reference") instance=ExtResource("5_sfoqk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2063822, 0.33497983, -0.92918444)
+bank_reference = NodePath("../../Placement Markers/P2_5")
+
+[node name="P2_6" parent="Bank Labels" unique_id=337261948 node_paths=PackedStringArray("bank_reference") instance=ExtResource("5_sfoqk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9065638, 0.33497983, -0.92918444)
+bank_reference = NodePath("../../Placement Markers/P2_6")
+
+[node name="P2_H" parent="Bank Labels" unique_id=141305793 node_paths=PackedStringArray("bank_reference") instance=ExtResource("5_sfoqk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.9587576, 0.3349796, 0.053915024)
+text = "0"
+bank_reference = NodePath("../../Placement Markers/P2_H")
