@@ -26,6 +26,7 @@ var selected_bank : int = 0
 
 var piece_scn : PackedScene = preload("uid://dx40hiqxmxc4x")
 
+var allow_input : bool = false
 var game_ready : bool = false
 var p1_win : bool = false
 var p2_win : bool = false
@@ -36,7 +37,7 @@ func _ready():
 	arrow_pointer.global_position = p1_marker_banks[selected_bank].global_position
 	await board_setup()
 	game_ready = true
-
+	allow_input = true
 
 #region Game Setup
 func board_setup():
@@ -58,7 +59,7 @@ func _input(event):
 		move_left()
 	if event.is_action_pressed("ui_right"):
 		move_right()
-	if event.is_action_pressed("ui_select") and game_ready:
+	if event.is_action_pressed("ui_select") and game_ready and allow_input:
 		choose_bank()
 		
 
