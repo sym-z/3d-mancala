@@ -33,6 +33,7 @@ var p2_win : bool = false
 
 signal turn_change
 signal extra_turn
+signal capture
 
 @export_category("Game Modifiers")
 @export var spread_delay : float = 0.5
@@ -242,7 +243,6 @@ func place_piece(bank: Marker3D):
 	bank.bank_updated.emit()
 
 func capture_check(bank : Marker3D, index : int):
-	print("CALLED")
 	# Since function was called with await, these internal awaits for the placement will carry out before the function returns to caller
 	var opposite_bank : Marker3D
 	if curr_turn == TURN.ONE:
@@ -251,6 +251,7 @@ func capture_check(bank : Marker3D, index : int):
 		opposite_bank = p1_marker_banks[5-index]
 	# Transfer pieces
 	if opposite_bank.get_child_count() != 0:
+		capture.emit()
 		for piece in opposite_bank.get_children():
 			piece.call_deferred("queue_free")
 			opposite_bank.bank_updated.emit()
