@@ -120,6 +120,7 @@ func check_endgame():
 	var p1_pieces : int = get_p1_total_pieces()
 	var p2_pieces : int = get_p2_total_pieces()
 	if p1_pieces == 0 or p2_pieces == 0:
+		arrow_pointer.visible = false
 		allow_input = false
 		game_ready = false
 		# Transfer all pieces from the other side to the correct home
