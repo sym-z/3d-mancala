@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://b3hl5psd3m3ob" path="res://scripts/placement_marker.gd" id="5_kg8jk"]
 [ext_resource type="Texture2D" uid="uid://ms4b8vqdfki" path="res://assets/sprites/arrow.png" id="6_6idux"]
 [ext_resource type="PackedScene" uid="uid://ckyorgxr70rcw" path="res://scenes/bank_label.tscn" id="7_oiwk8"]
+[ext_resource type="Shader" uid="uid://bqwnk8qat15h" path="res://wiggle.gdshader" id="8_6idux"]
 [ext_resource type="Script" uid="uid://di852yft7dld3" path="res://scripts/player_turn_label.gd" id="8_76x20"]
 [ext_resource type="FontFile" uid="uid://c4cxtyqn866dk" path="res://CrayonLibre-BLVel.otf" id="8_udu4s"]
 [ext_resource type="Script" uid="uid://cmeo1f1fxiya6" path="res://scripts/extra_turn_notif.gd" id="9_1o07t"]
@@ -36,6 +37,18 @@ sky = SubResource("Sky_k603i")
 ambient_light_sky_contribution = 0.0
 ambient_light_energy = 0.0
 reflected_light_source = 1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oiwk8"]
+shader = ExtResource("8_6idux")
+shader_parameter/speed = 0.005
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6idux"]
+shader = ExtResource("8_6idux")
+shader_parameter/speed = 0.005
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s5ll8"]
+shader = ExtResource("8_6idux")
+shader_parameter/speed = 0.005
 
 [node name="Sample Level" type="Node3D" unique_id=202412583 node_paths=PackedStringArray("p1_marker_banks", "p2_marker_banks", "p1_marker_home", "p2_marker_home", "arrow_pointer", "p1_cam", "p2_cam")]
 script = ExtResource("1_jddra")
@@ -138,6 +151,7 @@ texture = ExtResource("6_6idux")
 
 [node name="P1_1" parent="Bank Labels" unique_id=554239070 node_paths=PackedStringArray("bank_reference") instance=ExtResource("7_oiwk8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.931565, 0.33497983, 1.0933871)
+texture_filter = 0
 bank_reference = NodePath("../../Placement Markers/P1_1")
 
 [node name="P1_2" parent="Bank Labels" unique_id=1778548124 node_paths=PackedStringArray("bank_reference") instance=ExtResource("7_oiwk8")]
@@ -218,6 +232,7 @@ theme_override_constants/margin_top = 580
 layout_mode = 2
 
 [node name="Player Turn Label" type="Label" parent="CanvasLayer/Control/MarginContainer/VBoxContainer" unique_id=1869901986 node_paths=PackedStringArray("level")]
+material = SubResource("ShaderMaterial_oiwk8")
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 8
@@ -228,6 +243,7 @@ script = ExtResource("8_76x20")
 level = NodePath("../../../../..")
 
 [node name="Extra Turn Notif" type="Label" parent="CanvasLayer/Control" unique_id=1181065889 node_paths=PackedStringArray("level")]
+material = SubResource("ShaderMaterial_6idux")
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -250,6 +266,7 @@ script = ExtResource("9_1o07t")
 level = NodePath("../../..")
 
 [node name="Capture Notif" type="Label" parent="CanvasLayer/Control" unique_id=142970694 node_paths=PackedStringArray("level")]
+material = SubResource("ShaderMaterial_s5ll8")
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5

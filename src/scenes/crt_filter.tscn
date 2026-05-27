@@ -7,7 +7,7 @@ shader = ExtResource("1_ntrj8")
 shader_parameter/contrast = 0.75
 shader_parameter/scanline_frequency = 3.0
 shader_parameter/banding_strength = 0.012
-shader_parameter/transparancy = 0.9
+shader_parameter/transparancy = 0.55
 
 [node name="CanvasLayer" type="CanvasLayer" unique_id=893820042]
 layer = 2

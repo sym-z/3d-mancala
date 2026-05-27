@@ -37,6 +37,7 @@ signal capture
 
 @export_category("Game Modifiers")
 @export var spread_delay : float = 0.5
+
 func _ready():
 	arrow_pointer.global_position = p1_marker_banks[selected_bank].global_position
 	arrow_pointer.visible = false
@@ -216,7 +217,8 @@ func choose_bank():
 			print("EXTRA TURN")
 			extra_turn.emit()
 			allow_input = true
-			#TODO HANDLE EXTRA TURN LOGIC
+			check_endgame()
+			
 		# Landed on own side
 		# You can only capture if you land on "your" side and that is the only piece in there now
 		elif final_bank_num < NUM_BANKS:
@@ -228,10 +230,6 @@ func choose_bank():
 		# Landed in other player's side
 		else:
 			await swap_turn()
-			
-		#print("PLAYER ", curr_turn, " TURN DONE")
-		#print("SELECTED BANK: ", selected_bank)
-		#print("Final Bank Global: ", final_bank_num)
 	else:
 		print("NO PIECES IN SELECTED BANK")
 

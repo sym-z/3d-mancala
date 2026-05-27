@@ -11,7 +11,7 @@ func refresh_label():
 
 func assign_label(amt : int):
 	text = "%d" % amt
-	bulge()
+	#bulge()
 
 func bulge():
 	var tween : Tween = get_tree().create_tween()
