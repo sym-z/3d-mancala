@@ -64,7 +64,6 @@ p2_marker_home = NodePath("Placement Markers/P2_H")
 arrow_pointer = NodePath("Selection Arrow")
 p1_cam = NodePath("P1 Cam")
 p2_cam = NodePath("P2 Cam")
-spread_delay = 0.3
 
 [node name="Board" parent="." unique_id=968892763 instance=ExtResource("2_76x20")]
 

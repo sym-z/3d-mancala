@@ -37,7 +37,7 @@ signal capture
 signal game_over(p1_win : bool, p2_win : bool)
 
 @export_category("Game Modifiers")
-@export var spread_delay : float = 0.5
+@export var spread_delay : float = 0.3
 #endregion
 func _ready():
 	arrow_pointer.global_position = p1_marker_banks[selected_bank].global_position
