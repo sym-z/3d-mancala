@@ -14,6 +14,12 @@
 [ext_resource type="Script" uid="uid://b2apa38wplthk" path="res://scripts/capture_notif.gd" id="11_kg8jk"]
 [ext_resource type="Script" uid="uid://duwrxvo5c6k50" path="res://scripts/player_win_notif.gd" id="13_oiwk8"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_oiwk8"]
+size = Vector3(1.8276367, 2.3505402, 0.243504)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_s5ll8"]
+size = Vector3(4.9257507, 3.5134888, 0.18727112)
+
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_0pueg"]
 
 [sub_resource type="Compositor" id="Compositor_id4ae"]
@@ -66,6 +72,60 @@ p1_cam = NodePath("P1 Cam")
 p2_cam = NodePath("P2 Cam")
 
 [node name="Board" parent="." unique_id=968892763 instance=ExtResource("2_76x20")]
+
+[node name="Walls" type="Node3D" parent="." unique_id=1160151810]
+
+[node name="Vertical Walls" type="StaticBody3D" parent="Walls" unique_id=638004519]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/Vertical Walls" unique_id=97132943]
+transform = Transform3D(1.9106848e-15, 4.3711374e-08, 0.9999998, 0.9999997, -4.3711374e-08, 0, 4.3711374e-08, 0.9999997, -4.371138e-08, -2.3877618, 0.9367504, 0.06253708)
+shape = SubResource("BoxShape3D_oiwk8")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/Vertical Walls" unique_id=1622293974]
+transform = Transform3D(1.9106848e-15, 4.3711374e-08, 0.9999998, 0.9999997, -4.3711374e-08, 0, 4.3711374e-08, 0.9999997, -4.371138e-08, -1.6623496, 0.9367504, 0.06253708)
+shape = SubResource("BoxShape3D_oiwk8")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="Walls/Vertical Walls" unique_id=908502924]
+transform = Transform3D(1.9106848e-15, 4.3711374e-08, 0.9999998, 0.9999997, -4.3711374e-08, 0, 4.3711374e-08, 0.9999997, -4.371138e-08, -0.9378575, 0.9367504, 0.06253708)
+shape = SubResource("BoxShape3D_oiwk8")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="Walls/Vertical Walls" unique_id=1816132853]
+transform = Transform3D(1.9106848e-15, 4.3711374e-08, 0.9999998, 0.9999997, -4.3711374e-08, 0, 4.3711374e-08, 0.9999997, -4.371138e-08, -0.018107325, 0.9367504, 0.062537074)
+shape = SubResource("BoxShape3D_oiwk8")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="Walls/Vertical Walls" unique_id=1346627560]
+transform = Transform3D(1.9106848e-15, 4.3711374e-08, 0.9999998, 0.9999997, -4.3711374e-08, 0, 4.3711374e-08, 0.9999997, -4.371138e-08, 0.9096884, 0.9367504, 0.06253707)
+shape = SubResource("BoxShape3D_oiwk8")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="Walls/Vertical Walls" unique_id=177533322]
+transform = Transform3D(1.9106848e-15, 4.3711374e-08, 0.9999998, 0.9999997, -4.3711374e-08, 0, 4.3711374e-08, 0.9999997, -4.371138e-08, 1.6231402, 0.9367504, 0.06253707)
+shape = SubResource("BoxShape3D_oiwk8")
+
+[node name="CollisionShape3D7" type="CollisionShape3D" parent="Walls/Vertical Walls" unique_id=520909101]
+transform = Transform3D(1.9106848e-15, 4.3711374e-08, 0.9999998, 0.9999997, -4.3711374e-08, 0, 4.3711374e-08, 0.9999997, -4.371138e-08, 2.3378167, 0.9367504, 0.06253707)
+shape = SubResource("BoxShape3D_oiwk8")
+
+[node name="CollisionShape3D8" type="CollisionShape3D" parent="Walls/Vertical Walls" unique_id=1751023053]
+transform = Transform3D(1.9106848e-15, 4.3711374e-08, 0.9999998, 0.9999997, -4.3711374e-08, 0, 4.3711374e-08, 0.9999997, -4.371138e-08, 3.0779555, 0.9367504, 0.06253707)
+shape = SubResource("BoxShape3D_oiwk8")
+
+[node name="CollisionShape3D9" type="CollisionShape3D" parent="Walls/Vertical Walls" unique_id=1220730416]
+transform = Transform3D(1.9106848e-15, 4.3711374e-08, 0.9999998, 0.9999997, -4.3711374e-08, 0, 4.3711374e-08, 0.9999997, -4.371138e-08, -3.1296053, 0.9367504, 0.06253707)
+shape = SubResource("BoxShape3D_oiwk8")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Walls" unique_id=1487434470]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/StaticBody3D" unique_id=437948538]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.02154231, 1.8073261, 1.1424918)
+shape = SubResource("BoxShape3D_s5ll8")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="Walls/StaticBody3D" unique_id=2143994788]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.02154231, 1.8073261, -1.0111632)
+shape = SubResource("BoxShape3D_s5ll8")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/StaticBody3D" unique_id=432404432]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.02155757, 1.7662923, 0.064296484)
+shape = SubResource("BoxShape3D_s5ll8")
 
 [node name="P1 Cam" type="Camera3D" parent="." unique_id=155083364]
 transform = Transform3D(1, 0, 0, 0, 0.39576986, 0.91834974, 0, -0.91834974, 0.39576986, 0, 2.9886255, 1.7312129)
