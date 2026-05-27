@@ -12,6 +12,7 @@
 [ext_resource type="FontFile" uid="uid://c4cxtyqn866dk" path="res://CrayonLibre-BLVel.otf" id="8_udu4s"]
 [ext_resource type="Script" uid="uid://cmeo1f1fxiya6" path="res://scripts/extra_turn_notif.gd" id="9_1o07t"]
 [ext_resource type="Script" uid="uid://b2apa38wplthk" path="res://scripts/capture_notif.gd" id="11_kg8jk"]
+[ext_resource type="Script" uid="uid://duwrxvo5c6k50" path="res://scripts/player_win_notif.gd" id="13_oiwk8"]
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_0pueg"]
 
@@ -47,6 +48,10 @@ shader = ExtResource("8_6idux")
 shader_parameter/speed = 0.005
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_s5ll8"]
+shader = ExtResource("8_6idux")
+shader_parameter/speed = 0.005
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l4noq"]
 shader = ExtResource("8_6idux")
 shader_parameter/speed = 0.005
 
@@ -239,6 +244,7 @@ theme_override_constants/outline_size = 8
 theme_override_fonts/font = ExtResource("8_udu4s")
 theme_override_font_sizes/font_size = 48
 text = "Player: 1's Turn"
+uppercase = true
 script = ExtResource("8_76x20")
 level = NodePath("../../../../..")
 
@@ -262,6 +268,7 @@ theme_override_fonts/font = ExtResource("8_udu4s")
 theme_override_font_sizes/font_size = 76
 text = "Extra Turn!"
 horizontal_alignment = 1
+uppercase = true
 script = ExtResource("9_1o07t")
 level = NodePath("../../..")
 
@@ -285,5 +292,25 @@ theme_override_fonts/font = ExtResource("8_udu4s")
 theme_override_font_sizes/font_size = 76
 text = "Capture!"
 horizontal_alignment = 1
+uppercase = true
 script = ExtResource("11_kg8jk")
 level = NodePath("../../..")
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/Control" unique_id=1379378633]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Player Win Notif" type="Label" parent="CanvasLayer/Control/CenterContainer" unique_id=1363220861 node_paths=PackedStringArray("level")]
+material = SubResource("ShaderMaterial_l4noq")
+layout_mode = 2
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("8_udu4s")
+theme_override_font_sizes/font_size = 98
+text = "Player X Wins!"
+uppercase = true
+script = ExtResource("13_oiwk8")
+level = NodePath("../../../..")

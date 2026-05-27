@@ -8,6 +8,5 @@ func _ready():
 
 func reveal():
 	visible = true
-	print("REVEAL")
 	await get_tree().create_timer(view_time).timeout
 	visible = false

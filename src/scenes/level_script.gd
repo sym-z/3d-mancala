@@ -1,5 +1,5 @@
 extends Node3D
-
+#region Exports, Variables, Signals
 @export_category("Markers")
 @export_subgroup("Banks")
 @export var p1_marker_banks : Array[Marker3D]
@@ -34,10 +34,11 @@ var p2_win : bool = false
 signal turn_change
 signal extra_turn
 signal capture
+signal game_over(p1_win : bool, p2_win : bool)
 
 @export_category("Game Modifiers")
 @export var spread_delay : float = 0.5
-
+#endregion
 func _ready():
 	arrow_pointer.global_position = p1_marker_banks[selected_bank].global_position
 	arrow_pointer.visible = false
@@ -45,7 +46,6 @@ func _ready():
 	arrow_pointer.visible = true
 	game_ready = true
 	allow_input = true
-
 #region Game Setup
 func board_setup():
 	# Fill each players side with STARTING_AMT pieces.
@@ -62,15 +62,16 @@ func fill_bank(bank_arr : Array[Marker3D]):
 #endregion
 #region Input Handling
 func _input(event):
-	if event.is_action_pressed("ui_left") and allow_input:
-		move_left()
-	if event.is_action_pressed("ui_right") and allow_input:
-		move_right()
-	if event.is_action_pressed("ui_select") and game_ready and allow_input:
-		arrow_pointer.visible = false
-		allow_input = false
-		await choose_bank()
-		arrow_pointer.visible = true
+	if game_ready and allow_input:
+		if event.is_action_pressed("ui_left"):
+			move_left()
+		if event.is_action_pressed("ui_right"):
+			move_right()
+		if event.is_action_pressed("ui_select"):
+			arrow_pointer.visible = false
+			allow_input = false
+			await choose_bank()
+			arrow_pointer.visible = true
 
 func move_left():
 	#TODO: Check turn
@@ -98,7 +99,7 @@ func set_selection(bank_num : int):
 func swap_turn():
 	await get_tree().create_timer(spread_delay * 2).timeout
 	#TODO: CHECK GAME STATE END
-	check_endgame()
+	await check_endgame()
 	if curr_turn == TURN.ONE:
 		curr_turn = TURN.TWO
 		p1_cam.current = false
@@ -119,6 +120,8 @@ func check_endgame():
 	var p1_pieces : int = get_p1_total_pieces()
 	var p2_pieces : int = get_p2_total_pieces()
 	if p1_pieces == 0 or p2_pieces == 0:
+		allow_input = false
+		game_ready = false
 		# Transfer all pieces from the other side to the correct home
 		if p1_pieces != 0:
 			await move_to_home(p1_marker_banks, p1_marker_home)
@@ -126,6 +129,7 @@ func check_endgame():
 			await move_to_home(p2_marker_banks, p2_marker_home)
 		# Identify who has more pieces in home
 		check_winner()
+		game_over.emit(p1_win, p2_win)
 		# End Game
 		#TODO: Win behavior
 		print("P1 Win: ", p1_win, " P2 Win: ", p2_win)
@@ -178,7 +182,6 @@ func choose_bank():
 	var piece_amt : int = parent.get_child_count()
 	
 	if piece_amt > 0:
-		
 		# Delete all children
 		for piece in parent.get_children():
 			piece.queue_free()
@@ -186,7 +189,7 @@ func choose_bank():
 		# Iterate through, placing one piece per hop, remembering to place one piece in the current player's bank
 		# Keep track of final bank
 		var final_bank_num : int = -1
-		
+		# Player one's Turn
 		if curr_turn == TURN.ONE:
 			for i in range(1,piece_amt+1):
 				var global_bank = (selected_bank + i) % TOTAL_BANKS
@@ -198,9 +201,8 @@ func choose_bank():
 					place_piece(p1_marker_banks[global_bank])
 				final_bank_num = global_bank
 				await get_tree().create_timer(spread_delay).timeout
-		
+		# Player 2's Turn
 		else:
-			#TODO TEST THIS ONCE YOU HAVE TURN SWITCHING
 			for i in range(1,piece_amt+1):
 				var global_bank = (selected_bank + i) % TOTAL_BANKS
 				if global_bank == NUM_BANKS:
@@ -214,10 +216,9 @@ func choose_bank():
 		
 		# Landed in own Home
 		if final_bank_num == NUM_BANKS:
-			print("EXTRA TURN")
 			extra_turn.emit()
 			allow_input = true
-			check_endgame()
+			await check_endgame()
 			
 		# Landed on own side
 		# You can only capture if you land on "your" side and that is the only piece in there now
