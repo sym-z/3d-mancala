@@ -1,6 +1,6 @@
 extends Label
 @export var level : Node3D
-@export var view_time : float = 2.0
+@export var view_time : float = 1.0
 
 func _ready():
 	visible = false

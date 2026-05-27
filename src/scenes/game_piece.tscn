@@ -2,16 +2,29 @@
 
 [ext_resource type="ArrayMesh" uid="uid://cnhvsmxi3ybcv" path="res://scenes/piece_mesh.tres" id="1_6k0fr"]
 [ext_resource type="Script" uid="uid://c05vpl7j8gae3" path="res://scenes/game_piece.gd" id="1_440e6"]
+[ext_resource type="AudioStream" uid="uid://b0qypfvy23wt3" path="res://assets/audio/drop_sounds/piece_noise_-01.mp3" id="2_0iu1r"]
+[ext_resource type="AudioStream" uid="uid://bmsnb3aao7a7t" path="res://assets/audio/drop_sounds/piece_noise_-02.mp3" id="3_rgt2s"]
+[ext_resource type="AudioStream" uid="uid://cgx5lui05yrah" path="res://assets/audio/drop_sounds/piece_noise_-03.mp3" id="4_q5i3w"]
+[ext_resource type="AudioStream" uid="uid://bx872bop08hw8" path="res://assets/audio/drop_sounds/piece_noise_-04.mp3" id="5_8yq0w"]
+[ext_resource type="AudioStream" uid="uid://b25q1llchotnp" path="res://assets/audio/drop_sounds/piece_noise_-05.mp3" id="6_f4ikr"]
+[ext_resource type="AudioStream" uid="uid://bcr1mrxsrmrm0" path="res://assets/audio/drop_sounds/piece_noise_-06.mp3" id="7_8v3xt"]
+[ext_resource type="AudioStream" uid="uid://c2wnq7rc231l5" path="res://assets/audio/drop_sounds/piece_noise_-07.mp3" id="8_8sv42"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ohetr"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_0pueg"]
 radius = 0.0717823
 
-[node name="GamePiece" type="RigidBody3D" unique_id=1529533771 node_paths=PackedStringArray("mesh")]
+[sub_resource type="SphereShape3D" id="SphereShape3D_jui6c"]
+radius = 0.07821287
+
+[node name="GamePiece" type="RigidBody3D" unique_id=1529533771 node_paths=PackedStringArray("mesh", "detection_field", "speaker")]
 physics_material_override = SubResource("PhysicsMaterial_ohetr")
 script = ExtResource("1_440e6")
 mesh = NodePath("PieceMesh")
+detection_field = NodePath("Detection Field")
+speaker = NodePath("Speaker")
+drop_sounds = Array[AudioStreamMP3]([ExtResource("2_0iu1r"), ExtResource("3_rgt2s"), ExtResource("4_q5i3w"), ExtResource("5_8yq0w"), ExtResource("6_f4ikr"), ExtResource("7_8v3xt"), ExtResource("8_8sv42")])
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=555633486]
 shape = SubResource("SphereShape3D_0pueg")
@@ -20,3 +33,12 @@ debug_color = Color(0, 0.5921569, 0.7490196, 1)
 [node name="PieceMesh" type="MeshInstance3D" parent="." unique_id=725674864]
 transform = Transform3D(0.175, 0, 0, 0, 0.175, 0, 0, 0, 0.175, 0, 0, 0)
 mesh = ExtResource("1_6k0fr")
+
+[node name="Detection Field" type="Area3D" parent="." unique_id=426215008]
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Detection Field" unique_id=13179886]
+shape = SubResource("SphereShape3D_jui6c")
+debug_color = Color(0, 0.5921569, 0.7490196, 1)
+
+[node name="Speaker" type="AudioStreamPlayer3D" parent="." unique_id=476532900]
+bus = &"Pieces"
