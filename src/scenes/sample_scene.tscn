@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://co5dbnn0hdls8" path="res://scenes/level_script.gd" id="1_jddra"]
 [ext_resource type="PackedScene" uid="uid://cqqhmju2jlelh" path="res://scenes/board.tscn" id="2_76x20"]
 [ext_resource type="Shader" uid="uid://c076opqv751uh" path="res://sky.gdshader" id="3_1o07t"]
+[ext_resource type="Texture2D" uid="uid://dwqfgfg5bi2w7" path="res://assets/sprites/tiling_bg.png" id="4_s5ll8"]
 [ext_resource type="PackedScene" uid="uid://dx40hiqxmxc4x" path="res://scenes/game_piece.tscn" id="4_udu4s"]
 [ext_resource type="Script" uid="uid://b3hl5psd3m3ob" path="res://scripts/placement_marker.gd" id="5_kg8jk"]
 [ext_resource type="Texture2D" uid="uid://ms4b8vqdfki" path="res://assets/sprites/arrow.png" id="6_6idux"]
@@ -33,6 +34,7 @@ shader_parameter/total_spd = 0.18
 shader_parameter/brightness = 0.235
 shader_parameter/min_bright = 0.6
 shader_parameter/max_bright = 0.9
+shader_parameter/tex = ExtResource("4_s5ll8")
 
 [sub_resource type="Sky" id="Sky_k603i"]
 sky_material = SubResource("ShaderMaterial_vftan")
