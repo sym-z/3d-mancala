@@ -23,6 +23,8 @@ shader_parameter/g_spd = 1.03
 shader_parameter/b_spd = 0.683
 shader_parameter/total_spd = 0.18
 shader_parameter/brightness = 0.235
+shader_parameter/min_bright = 0.6
+shader_parameter/max_bright = 0.9
 
 [sub_resource type="Sky" id="Sky_k603i"]
 sky_material = SubResource("ShaderMaterial_vftan")

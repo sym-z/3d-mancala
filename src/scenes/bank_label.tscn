@@ -1,8 +1,10 @@
 [gd_scene format=3 uid="uid://ckyorgxr70rcw"]
 
+[ext_resource type="FontFile" uid="uid://c4cxtyqn866dk" path="res://CrayonLibre-BLVel.otf" id="1_4jbk2"]
 [ext_resource type="Script" uid="uid://dpft2bjinhndg" path="res://scenes/bank_label.gd" id="1_vqpjv"]
 
 [node name="Bank Label" type="Label3D" unique_id=554239070]
 billboard = 1
 text = "4"
+font = ExtResource("1_4jbk2")
 script = ExtResource("1_vqpjv")
