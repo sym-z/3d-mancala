@@ -5,6 +5,9 @@
 
 [node name="Bank Label" type="Label3D" unique_id=554239070]
 billboard = 1
+modulate = Color(1, 1, 1, 0.5882353)
 text = "4"
 font = ExtResource("1_4jbk2")
+font_size = 72
 script = ExtResource("1_vqpjv")
+tween_speed = 0.3

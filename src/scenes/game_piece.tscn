@@ -27,14 +27,16 @@ speaker = NodePath("Speaker")
 drop_sounds = Array[AudioStreamMP3]([ExtResource("2_0iu1r"), ExtResource("3_rgt2s"), ExtResource("4_q5i3w"), ExtResource("5_8yq0w"), ExtResource("6_f4ikr"), ExtResource("7_8v3xt"), ExtResource("8_8sv42")])
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=555633486]
+transform = Transform3D(1.376, 0, 0, 0, 1.376, 0, 0, 0, 1.376, 0, 0, 0)
 shape = SubResource("SphereShape3D_0pueg")
 debug_color = Color(0, 0.5921569, 0.7490196, 1)
 
 [node name="PieceMesh" type="MeshInstance3D" parent="." unique_id=725674864]
-transform = Transform3D(0.175, 0, 0, 0, 0.175, 0, 0, 0, 0.175, 0, 0, 0)
+transform = Transform3D(0.28, 0, 0, 0, 0.28, 0, 0, 0, 0.28, 0, 0, 0)
 mesh = ExtResource("1_6k0fr")
 
 [node name="Detection Field" type="Area3D" parent="." unique_id=426215008]
+transform = Transform3D(1.325, 0, 0, 0, 1.325, 0, 0, 0, 1.325, 0, 0, 0)
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Detection Field" unique_id=13179886]
 shape = SubResource("SphereShape3D_jui6c")

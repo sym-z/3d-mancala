@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://c0wr77kcmfrov"]
 
 [ext_resource type="Script" uid="uid://co5dbnn0hdls8" path="res://scenes/level_script.gd" id="1_jddra"]
-[ext_resource type="PackedScene" uid="uid://cqqhmju2jlelh" path="res://scenes/board.tscn" id="2_76x20"]
 [ext_resource type="Shader" uid="uid://c076opqv751uh" path="res://sky.gdshader" id="3_1o07t"]
+[ext_resource type="PackedScene" uid="uid://vymfgnav1j6r" path="res://scenes/new_board.tscn" id="3_l4noq"]
 [ext_resource type="Texture2D" uid="uid://dwqfgfg5bi2w7" path="res://assets/sprites/tiling_bg.png" id="4_s5ll8"]
 [ext_resource type="PackedScene" uid="uid://dx40hiqxmxc4x" path="res://scenes/game_piece.tscn" id="4_udu4s"]
 [ext_resource type="Script" uid="uid://b3hl5psd3m3ob" path="res://scripts/placement_marker.gd" id="5_kg8jk"]
@@ -16,10 +16,28 @@
 [ext_resource type="Script" uid="uid://duwrxvo5c6k50" path="res://scripts/player_win_notif.gd" id="13_oiwk8"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_oiwk8"]
-size = Vector3(1.8276367, 2.3505402, 0.243504)
+size = Vector3(1.8276367, 2.5732307, 0.103478536)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_s5ll8"]
-size = Vector3(4.9257507, 3.5134888, 0.18727112)
+[sub_resource type="BoxShape3D" id="BoxShape3D_8n6kf"]
+size = Vector3(1.8276367, 2.5722628, 0.59060204)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_e351d"]
+size = Vector3(1.8276367, 2.5732307, 0.07273536)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fenef"]
+size = Vector3(1.8276367, 2.5732307, 0.24497658)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6yaw1"]
+size = Vector3(1.8276367, 2.5732307, 0.3036924)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_o6mf3"]
+size = Vector3(7.5870285, 3.5134888, 0.20672989)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_x320b"]
+size = Vector3(7.5926437, 3.5134888, 0.30957794)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4dbp5"]
+size = Vector3(5.5644455, 3.5134888, 0.13568497)
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_0pueg"]
 
@@ -73,61 +91,64 @@ arrow_pointer = NodePath("Selection Arrow")
 p1_cam = NodePath("P1 Cam")
 p2_cam = NodePath("P2 Cam")
 
-[node name="Board" parent="." unique_id=968892763 instance=ExtResource("2_76x20")]
+[node name="New Board" parent="." unique_id=182566537 instance=ExtResource("3_l4noq")]
+transform = Transform3D(0.38, 0, 0, 0, -1.6610327e-08, 0.38, 0, -0.38, -1.6610327e-08, 0, -0.2214489, 0)
 
 [node name="Walls" type="Node3D" parent="." unique_id=1160151810]
+visible = false
 
 [node name="Vertical Walls" type="StaticBody3D" parent="Walls" unique_id=638004519]
+visible = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/Vertical Walls" unique_id=97132943]
-transform = Transform3D(1.9106848e-15, 4.3711374e-08, 0.9999998, 0.9999997, -4.3711374e-08, 0, 4.3711374e-08, 0.9999997, -4.371138e-08, -2.3877618, 0.9367504, 0.06253708)
+transform = Transform3D(1.9106848e-15, 4.3711374e-08, 0.9999998, 0.9999997, -4.3711374e-08, 0, 4.3711374e-08, 0.9999997, -4.371138e-08, -2.7262526, 0.9367504, -0.06442173)
 shape = SubResource("BoxShape3D_oiwk8")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/Vertical Walls" unique_id=1622293974]
-transform = Transform3D(1.9106848e-15, 4.3711374e-08, 0.9999998, 0.9999997, -4.3711374e-08, 0, 4.3711374e-08, 0.9999997, -4.371138e-08, -1.6623496, 0.9367504, 0.06253708)
+transform = Transform3D(1.9106848e-15, 4.3711374e-08, 0.9999998, 0.9999997, -4.3711374e-08, 0, 4.3711374e-08, 0.9999997, -4.371138e-08, -1.8839158, 0.9367504, -0.0625403)
 shape = SubResource("BoxShape3D_oiwk8")
 
 [node name="CollisionShape3D3" type="CollisionShape3D" parent="Walls/Vertical Walls" unique_id=908502924]
-transform = Transform3D(1.9106848e-15, 4.3711374e-08, 0.9999998, 0.9999997, -4.3711374e-08, 0, 4.3711374e-08, 0.9999997, -4.371138e-08, -0.9378575, 0.9367504, 0.06253708)
+transform = Transform3D(1.9106848e-15, 4.3711374e-08, 0.9999998, 0.9999997, -4.3711374e-08, 0, 4.3711374e-08, 0.9999997, -4.371138e-08, -1.0665091, 0.9367504, -0.055392973)
 shape = SubResource("BoxShape3D_oiwk8")
 
 [node name="CollisionShape3D4" type="CollisionShape3D" parent="Walls/Vertical Walls" unique_id=1816132853]
-transform = Transform3D(1.9106848e-15, 4.3711374e-08, 0.9999998, 0.9999997, -4.3711374e-08, 0, 4.3711374e-08, 0.9999997, -4.371138e-08, -0.018107325, 0.9367504, 0.062537074)
-shape = SubResource("BoxShape3D_oiwk8")
+transform = Transform3D(1.9106848e-15, 4.3711374e-08, 0.9999998, 0.9999997, -4.3711374e-08, 0, 4.3711374e-08, 0.9999997, -4.371138e-08, 0.008002775, 0.9367504, -0.060022913)
+shape = SubResource("BoxShape3D_8n6kf")
 
 [node name="CollisionShape3D5" type="CollisionShape3D" parent="Walls/Vertical Walls" unique_id=1346627560]
-transform = Transform3D(1.9106848e-15, 4.3711374e-08, 0.9999998, 0.9999997, -4.3711374e-08, 0, 4.3711374e-08, 0.9999997, -4.371138e-08, 0.9096884, 0.9367504, 0.06253707)
+transform = Transform3D(1.9106848e-15, 4.3711374e-08, 0.9999998, 0.9999997, -4.3711374e-08, 0, 4.3711374e-08, 0.9999997, -4.371138e-08, 1.0659435, 0.9367504, -0.060015865)
 shape = SubResource("BoxShape3D_oiwk8")
 
 [node name="CollisionShape3D6" type="CollisionShape3D" parent="Walls/Vertical Walls" unique_id=177533322]
-transform = Transform3D(1.9106848e-15, 4.3711374e-08, 0.9999998, 0.9999997, -4.3711374e-08, 0, 4.3711374e-08, 0.9999997, -4.371138e-08, 1.6231402, 0.9367504, 0.06253707)
-shape = SubResource("BoxShape3D_oiwk8")
+transform = Transform3D(1.9106848e-15, 4.3711374e-08, 0.9999998, 0.9999997, -4.3711374e-08, 0, 4.3711374e-08, 0.9999997, -4.371138e-08, 1.8957684, 0.9367504, -0.056952126)
+shape = SubResource("BoxShape3D_e351d")
 
 [node name="CollisionShape3D7" type="CollisionShape3D" parent="Walls/Vertical Walls" unique_id=520909101]
-transform = Transform3D(1.9106848e-15, 4.3711374e-08, 0.9999998, 0.9999997, -4.3711374e-08, 0, 4.3711374e-08, 0.9999997, -4.371138e-08, 2.3378167, 0.9367504, 0.06253707)
+transform = Transform3D(1.9106848e-15, 4.3711374e-08, 0.9999998, 0.9999997, -4.3711374e-08, 0, 4.3711374e-08, 0.9999997, -4.371138e-08, 2.7269223, 0.9367504, -0.06307957)
 shape = SubResource("BoxShape3D_oiwk8")
 
 [node name="CollisionShape3D8" type="CollisionShape3D" parent="Walls/Vertical Walls" unique_id=1751023053]
-transform = Transform3D(1.9106848e-15, 4.3711374e-08, 0.9999998, 0.9999997, -4.3711374e-08, 0, 4.3711374e-08, 0.9999997, -4.371138e-08, 3.0779555, 0.9367504, 0.06253707)
-shape = SubResource("BoxShape3D_oiwk8")
+transform = Transform3D(1.9106848e-15, 4.3711374e-08, 0.9999998, 0.9999997, -4.3711374e-08, 0, 4.3711374e-08, 0.9999997, -4.371138e-08, 3.657299, 0.9367504, 0.06253707)
+shape = SubResource("BoxShape3D_fenef")
 
 [node name="CollisionShape3D9" type="CollisionShape3D" parent="Walls/Vertical Walls" unique_id=1220730416]
-transform = Transform3D(1.9106848e-15, 4.3711374e-08, 0.9999998, 0.9999997, -4.3711374e-08, 0, 4.3711374e-08, 0.9999997, -4.371138e-08, -3.1296053, 0.9367504, 0.06253707)
-shape = SubResource("BoxShape3D_oiwk8")
+transform = Transform3D(1.9106848e-15, 4.3711374e-08, 0.9999998, 0.9999997, -4.3711374e-08, 0, 4.3711374e-08, 0.9999997, -4.371138e-08, -3.6632154, 0.9367504, -0.06251189)
+shape = SubResource("BoxShape3D_6yaw1")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Walls" unique_id=1487434470]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Walls/StaticBody3D" unique_id=437948538]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.02154231, 1.8073261, 1.1424918)
-shape = SubResource("BoxShape3D_s5ll8")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.019043684, 1.8073261, 1.1327624)
+shape = SubResource("BoxShape3D_o6mf3")
 
 [node name="CollisionShape3D3" type="CollisionShape3D" parent="Walls/StaticBody3D" unique_id=2143994788]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.02154231, 1.8073261, -1.0111632)
-shape = SubResource("BoxShape3D_s5ll8")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.012329817, 1.8073261, -1.200165)
+shape = SubResource("BoxShape3D_x320b")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Walls/StaticBody3D" unique_id=432404432]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.02155757, 1.7662923, 0.064296484)
-shape = SubResource("BoxShape3D_s5ll8")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0009071827, 1.7662923, 0.00011911988)
+shape = SubResource("BoxShape3D_4dbp5")
 
 [node name="P1 Cam" type="Camera3D" parent="." unique_id=155083364]
 transform = Transform3D(1, 0, 0, 0, 0.39576986, 0.91834974, 0, -0.91834974, 0.39576986, 0, 2.9886255, 1.7312129)
@@ -135,7 +156,7 @@ attributes = SubResource("CameraAttributesPractical_0pueg")
 compositor = SubResource("Compositor_id4ae")
 
 [node name="P2 Cam" type="Camera3D" parent="." unique_id=1002071270]
-transform = Transform3D(-0.99999994, 8.029314e-08, -3.457969e-08, 0, 0.39554554, 0.9184465, 8.742277e-08, 0.9184465, -0.39554554, 0, 2.9886255, -1.1855042)
+transform = Transform3D(-1, 8.0293134e-08, -3.4579685e-08, 0, 0.39554548, 0.91844636, 8.742278e-08, 0.91844636, -0.39554548, 0, 2.9886255, -1.8616006)
 attributes = SubResource("CameraAttributesPractical_0pueg")
 compositor = SubResource("Compositor_id4ae")
 
@@ -153,91 +174,91 @@ visible = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.51, 0)
 
 [node name="P1_1" type="Marker3D" parent="Placement Markers" unique_id=26367012]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0358663, 1, 0.5660628)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2835884, 1, 0.5147021)
 script = ExtResource("5_kg8jk")
 
 [node name="P1_2" type="Marker3D" parent="Placement Markers" unique_id=1211023742]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2893002, 1, 0.5660628)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4879327, 1, 0.5383388)
 script = ExtResource("5_kg8jk")
 
 [node name="P1_3" type="Marker3D" parent="Placement Markers" unique_id=1488861513]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.57120466, 1, 0.5660628)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6619396, 1, 0.5660628)
 script = ExtResource("5_kg8jk")
 
 [node name="P1_4" type="Marker3D" parent="Placement Markers" unique_id=867313167]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5518079, 1, 0.5660628)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.66522694, 1, 0.5717339)
 script = ExtResource("5_kg8jk")
 
 [node name="P1_5" type="Marker3D" parent="Placement Markers" unique_id=1008944792]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.273067, 1, 0.5660628)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4828916, 1, 0.57173353)
 script = ExtResource("5_kg8jk")
 
 [node name="P1_6" type="Marker3D" parent="Placement Markers" unique_id=875872734]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9753449, 1, 0.5660628)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3099296, 1, 0.55472094)
 script = ExtResource("5_kg8jk")
 
 [node name="P1_H" type="Marker3D" parent="Placement Markers" unique_id=1526196415]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6997674, 1, -0.0001885891)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1591132, 1, -0.005859524)
 script = ExtResource("5_kg8jk")
 
 [node name="P2_1" type="Marker3D" parent="Placement Markers" unique_id=4533112]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9753454, 1, -0.5126619)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2985885, 1, -0.51833284)
 script = ExtResource("5_kg8jk")
 
 [node name="P2_2" type="Marker3D" parent="Placement Markers" unique_id=1649694340]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2699034, 1, -0.5126619)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4627149, 1, -0.52967453)
 script = ExtResource("5_kg8jk")
 
 [node name="P2_3" type="Marker3D" parent="Placement Markers" unique_id=235128266]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.53915405, 1, -0.5126619)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6469021, 1, -0.52400374)
 script = ExtResource("5_kg8jk")
 
 [node name="P2_4" type="Marker3D" parent="Placement Markers" unique_id=966439575]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5743685, 1, -0.5126619)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.67077446, 1, -0.52967453)
 script = ExtResource("5_kg8jk")
 
 [node name="P2_5" type="Marker3D" parent="Placement Markers" unique_id=1117528429]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2893004, 1, -0.5126619)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4764414, 1, -0.51833266)
 script = ExtResource("5_kg8jk")
 
 [node name="P2_6" type="Marker3D" parent="Placement Markers" unique_id=1390524248]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0105593, 1, -0.5126619)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3111188, 1, -0.5126619)
 script = ExtResource("5_kg8jk")
 
 [node name="P2_H" type="Marker3D" parent="Placement Markers" unique_id=873803096]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.747635, 1, -0.0001885891)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.1502712, 1, -0.0342142)
 script = ExtResource("5_kg8jk")
 
 [node name="Selection Arrow" type="Sprite3D" parent="." unique_id=1875995472]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 1.1056426, 0)
+modulate = Color(1, 1, 1, 0.78431374)
 billboard = 1
 texture = ExtResource("6_6idux")
 
 [node name="Bank Labels" type="Node3D" parent="." unique_id=846181313]
 
 [node name="P1_1" parent="Bank Labels" unique_id=554239070 node_paths=PackedStringArray("bank_reference") instance=ExtResource("7_oiwk8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.931565, 0.33497983, 1.0933871)
-texture_filter = 0
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1933978, 0.33497977, 1.0877881)
 bank_reference = NodePath("../../Placement Markers/P1_1")
 
 [node name="P1_2" parent="Bank Labels" unique_id=1778548124 node_paths=PackedStringArray("bank_reference") instance=ExtResource("7_oiwk8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2309136, 0.33497983, 1.0933871)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4273932, 0.3349799, 1.093063)
 bank_reference = NodePath("../../Placement Markers/P1_2")
 
 [node name="P1_3" parent="Bank Labels" unique_id=912732546 node_paths=PackedStringArray("bank_reference") instance=ExtResource("7_oiwk8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5519172, 0.33497983, 1.0933871)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.64180195, 0.33497983, 1.0933871)
 bank_reference = NodePath("../../Placement Markers/P1_3")
 
 [node name="P1_4" parent="Bank Labels" unique_id=239804432 node_paths=PackedStringArray("bank_reference") instance=ExtResource("7_oiwk8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5175233, 0.33497983, 1.0933871)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.60740805, 0.33497983, 1.0933871)
 bank_reference = NodePath("../../Placement Markers/P1_4")
 
 [node name="P1_5" parent="Bank Labels" unique_id=289642587 node_paths=PackedStringArray("bank_reference") instance=ExtResource("7_oiwk8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2094197, 0.33497983, 1.0933871)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3991771, 0.33497983, 1.0933871)
 bank_reference = NodePath("../../Placement Markers/P1_5")
 
 [node name="P1_6" parent="Bank Labels" unique_id=1428920457 node_paths=PackedStringArray("bank_reference") instance=ExtResource("7_oiwk8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8902476, 0.33497983, 1.0933871)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.149915, 0.33497983, 1.0933871)
 bank_reference = NodePath("../../Placement Markers/P1_6")
 
 [node name="P1_H" parent="Bank Labels" unique_id=518989739 node_paths=PackedStringArray("bank_reference") instance=ExtResource("7_oiwk8")]
@@ -246,27 +267,27 @@ text = "0"
 bank_reference = NodePath("../../Placement Markers/P1_H")
 
 [node name="P2_1" parent="Bank Labels" unique_id=904960078 node_paths=PackedStringArray("bank_reference") instance=ExtResource("7_oiwk8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8646576, 0.33497983, -0.92918444)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2098534, 0.33497983, -1.0698099)
 bank_reference = NodePath("../../Placement Markers/P2_1")
 
 [node name="P2_2" parent="Bank Labels" unique_id=901654719 node_paths=PackedStringArray("bank_reference") instance=ExtResource("7_oiwk8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1908736, 0.33497983, -0.92918444)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3851218, 0.33497983, -1.0586832)
 bank_reference = NodePath("../../Placement Markers/P2_2")
 
 [node name="P2_3" parent="Bank Labels" unique_id=1620592289 node_paths=PackedStringArray("bank_reference") instance=ExtResource("7_oiwk8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5246377, 0.33497983, -0.92918444)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6001792, 0.33497983, -1.0586833)
 bank_reference = NodePath("../../Placement Markers/P2_3")
 
 [node name="P2_4" parent="Bank Labels" unique_id=759428942 node_paths=PackedStringArray("bank_reference") instance=ExtResource("7_oiwk8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.54083765, 0.33497983, -0.92918444)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6140463, 0.33497983, -1.0877864)
 bank_reference = NodePath("../../Placement Markers/P2_4")
 
 [node name="P2_5" parent="Bank Labels" unique_id=589992565 node_paths=PackedStringArray("bank_reference") instance=ExtResource("7_oiwk8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2063822, 0.33497983, -0.92918444)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3995993, 0.33497983, -1.0758511)
 bank_reference = NodePath("../../Placement Markers/P2_5")
 
 [node name="P2_6" parent="Bank Labels" unique_id=337261948 node_paths=PackedStringArray("bank_reference") instance=ExtResource("7_oiwk8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9065638, 0.33497983, -0.92918444)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1601653, 0.33497983, -1.0748706)
 bank_reference = NodePath("../../Placement Markers/P2_6")
 
 [node name="P2_H" parent="Bank Labels" unique_id=141305793 node_paths=PackedStringArray("bank_reference") instance=ExtResource("7_oiwk8")]
