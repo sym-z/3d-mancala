@@ -15,10 +15,18 @@ run/main_scene="uid://c0wr77kcmfrov"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
+[audio]
+
+buses/default_bus_layout="uid://cpcrcwewb222w"
+
 [autoload]
 
 CrtFilter="*uid://dthg832imncde"
 SceneTransition="*uid://ccuqih0tepkko"
+
+[display]
+
+window/stretch/mode="viewport"
 
 [global_group]
 

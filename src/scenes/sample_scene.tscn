@@ -332,6 +332,7 @@ horizontal_alignment = 1
 uppercase = true
 script = ExtResource("9_1o07t")
 level = NodePath("../../..")
+view_time = 0.75
 
 [node name="Capture Notif" type="Label" parent="CanvasLayer/Control" unique_id=142970694 node_paths=PackedStringArray("level")]
 material = SubResource("ShaderMaterial_s5ll8")
@@ -356,6 +357,7 @@ horizontal_alignment = 1
 uppercase = true
 script = ExtResource("11_kg8jk")
 level = NodePath("../../..")
+view_duration = 0.75
 
 [node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/Control" unique_id=1379378633]
 layout_mode = 1

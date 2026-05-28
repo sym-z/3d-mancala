@@ -62,7 +62,7 @@ func fill_bank(bank_arr : Array[Marker3D]):
 #endregion
 #region Input Handling
 func _input(event):
-	if game_ready and allow_input:
+	if game_ready and allow_input and p1_win == false and p2_win == false:
 		if event.is_action_pressed("ui_left"):
 			move_left()
 		if event.is_action_pressed("ui_right"):
@@ -133,7 +133,6 @@ func check_endgame():
 		game_over.emit(p1_win, p2_win)
 		# End Game
 		#TODO: Win behavior
-		print("P1 Win: ", p1_win, " P2 Win: ", p2_win)
 
 func get_p1_total_pieces() -> int:
 	var total : int = 0
@@ -217,9 +216,11 @@ func choose_bank():
 		
 		# Landed in own Home
 		if final_bank_num == NUM_BANKS:
-			extra_turn.emit()
-			allow_input = true
 			await check_endgame()
+			if p1_win == false and p2_win == false:
+				extra_turn.emit()
+				allow_input = true
+			
 			
 		# Landed on own side
 		# You can only capture if you land on "your" side and that is the only piece in there now

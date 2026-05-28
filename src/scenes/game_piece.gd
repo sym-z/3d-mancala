@@ -21,8 +21,6 @@ func _ready():
 
 func collision(body : Node):
 	if  drop_sound_played == false and body != self:
-		print("COLLIDE WITH ", body)
-		#TODO: PLAY DROP SOUND
 		play_random_drop_sound()
 		drop_sound_played = true
 
