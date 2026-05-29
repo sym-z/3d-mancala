@@ -72,6 +72,10 @@ func _input(event):
 			allow_input = false
 			await choose_bank()
 			arrow_pointer.visible = true
+	
+	if p1_win or p2_win:
+		if event.is_action_pressed("slam"):
+			slam()
 
 func move_left():
 	#TODO: Check turn
@@ -94,6 +98,16 @@ func set_selection(bank_num : int):
 		arrow_pointer.global_position = p1_marker_banks[bank_num].global_position
 	else:
 		arrow_pointer.global_position = p2_marker_banks[bank_num].global_position
+
+func slam():
+	var force = 10.
+	for bank in p1_marker_banks:
+		for piece in bank.get_children():
+			piece.apply_impulse(Vector3(randf_range(0.0,1.0),randf_range(0.0,1.0),randf_range(0.0,1.0)) * force)
+	for bank in p2_marker_banks:
+		for piece in bank.get_children():
+			piece.apply_impulse(Vector3(randf_range(0.0,1.0),randf_range(0.0,1.0),randf_range(0.0,1.0)) * force)
+
 #endregion
 #region Game State Modification
 func swap_turn():
