@@ -17,4 +17,5 @@ func reveal(p1_win : bool, p2_win : bool):
 	visible = true
 	await get_tree().create_timer(view_duration).timeout
 	visible = false
+	await get_tree().create_timer(10.0).timeout
 	SceneTransition.main_menu()

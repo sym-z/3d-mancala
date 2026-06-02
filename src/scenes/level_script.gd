@@ -73,8 +73,8 @@ func _input(event):
 			await choose_bank()
 			arrow_pointer.visible = true
 	
-	if p1_win or p2_win:
-		if event.is_action_pressed("slam"):
+	if event.is_action_pressed("slam"):
+		if p1_win or p2_win:
 			slam()
 
 func move_left():
@@ -101,12 +101,10 @@ func set_selection(bank_num : int):
 
 func slam():
 	var force = 10.
-	for bank in p1_marker_banks:
-		for piece in bank.get_children():
-			piece.apply_impulse(Vector3(randf_range(0.0,1.0),randf_range(0.0,1.0),randf_range(0.0,1.0)) * force)
-	for bank in p2_marker_banks:
-		for piece in bank.get_children():
-			piece.apply_impulse(Vector3(randf_range(0.0,1.0),randf_range(0.0,1.0),randf_range(0.0,1.0)) * force)
+	for piece in p1_marker_home.get_children():
+		piece.apply_impulse(Vector3(randf_range(0.0,1.0),randf_range(0.0,1.0),randf_range(0.0,1.0)) * force)
+	for piece in p2_marker_home.get_children():
+		piece.apply_impulse(Vector3(randf_range(0.0,1.0),randf_range(0.0,1.0),randf_range(0.0,1.0)) * force)
 
 #endregion
 #region Game State Modification
@@ -249,6 +247,7 @@ func choose_bank():
 			await swap_turn()
 	else:
 		print("NO PIECES IN SELECTED BANK")
+		allow_input = true
 
 # Similarly to fill banks, used when iterating through banks after choice.
 func place_piece(bank: Marker3D):
