@@ -398,3 +398,5 @@ text = "Player X Wins!"
 uppercase = true
 script = ExtResource("13_oiwk8")
 level = NodePath("../../../..")
+
+[node name="Announcer" type="AudioStreamPlayer" parent="." unique_id=540410151]
