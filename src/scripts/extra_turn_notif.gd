@@ -8,5 +8,6 @@ func _ready():
 
 func reveal():
 	visible = true
+	level.announcer.extra_turn()
 	await get_tree().create_timer(view_time).timeout
 	visible = false

@@ -8,12 +8,19 @@
 [ext_resource type="Script" uid="uid://b3hl5psd3m3ob" path="res://scripts/placement_marker.gd" id="5_kg8jk"]
 [ext_resource type="Texture2D" uid="uid://ms4b8vqdfki" path="res://assets/sprites/arrow.png" id="6_6idux"]
 [ext_resource type="PackedScene" uid="uid://ckyorgxr70rcw" path="res://scenes/bank_label.tscn" id="7_oiwk8"]
-[ext_resource type="Shader" uid="uid://bqwnk8qat15h" path="res://wiggle.gdshader" id="8_6idux"]
 [ext_resource type="Script" uid="uid://di852yft7dld3" path="res://scripts/player_turn_label.gd" id="8_76x20"]
 [ext_resource type="FontFile" uid="uid://c4cxtyqn866dk" path="res://CrayonLibre-BLVel.otf" id="8_udu4s"]
 [ext_resource type="Script" uid="uid://cmeo1f1fxiya6" path="res://scripts/extra_turn_notif.gd" id="9_1o07t"]
+[ext_resource type="Shader" uid="uid://c6o6g5scoqwur" path="res://button_jiggle.gdshader" id="9_x320b"]
 [ext_resource type="Script" uid="uid://b2apa38wplthk" path="res://scripts/capture_notif.gd" id="11_kg8jk"]
 [ext_resource type="Script" uid="uid://duwrxvo5c6k50" path="res://scripts/player_win_notif.gd" id="13_oiwk8"]
+[ext_resource type="AudioStream" uid="uid://bhwahdgj138ai" path="res://assets/audio/capture.mp3" id="15_6yaw1"]
+[ext_resource type="Script" uid="uid://dagfgovf0ki1c" path="res://scripts/announcer.gd" id="15_e351d"]
+[ext_resource type="AudioStream" uid="uid://bw0m7xn8a7ore" path="res://assets/audio/title_1.mp3" id="15_x320b"]
+[ext_resource type="AudioStream" uid="uid://3xv6scvmps4l" path="res://assets/audio/extra_turn_2.mp3" id="17_o6mf3"]
+[ext_resource type="AudioStream" uid="uid://dlc76p4rcnav6" path="res://assets/audio/p1_win.mp3" id="18_x320b"]
+[ext_resource type="AudioStream" uid="uid://dni58lmqlht6f" path="res://assets/audio/p2_win.mp3" id="19_4dbp5"]
+[ext_resource type="AudioStream" uid="uid://48bqffl6eiyl" path="res://assets/audio/tie.mp3" id="21_4dbp5"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_oiwk8"]
 size = Vector3(1.8276367, 2.5732307, 0.103478536)
@@ -66,28 +73,29 @@ ambient_light_energy = 0.0
 reflected_light_source = 1
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_oiwk8"]
-shader = ExtResource("8_6idux")
-shader_parameter/speed = 0.005
+shader = ExtResource("9_x320b")
+shader_parameter/strength = 5.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6idux"]
-shader = ExtResource("8_6idux")
-shader_parameter/speed = 0.005
+shader = ExtResource("9_x320b")
+shader_parameter/strength = 5.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_s5ll8"]
-shader = ExtResource("8_6idux")
-shader_parameter/speed = 0.005
+shader = ExtResource("9_x320b")
+shader_parameter/strength = 5.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_l4noq"]
-shader = ExtResource("8_6idux")
-shader_parameter/speed = 0.005
+shader = ExtResource("9_x320b")
+shader_parameter/strength = 5.0
 
-[node name="Sample Level" type="Node3D" unique_id=202412583 node_paths=PackedStringArray("p1_marker_banks", "p2_marker_banks", "p1_marker_home", "p2_marker_home", "arrow_pointer", "p1_cam", "p2_cam")]
+[node name="Sample Level" type="Node3D" unique_id=202412583 node_paths=PackedStringArray("p1_marker_banks", "p2_marker_banks", "p1_marker_home", "p2_marker_home", "arrow_pointer", "announcer", "p1_cam", "p2_cam")]
 script = ExtResource("1_jddra")
 p1_marker_banks = [NodePath("Placement Markers/P1_1"), NodePath("Placement Markers/P1_2"), NodePath("Placement Markers/P1_3"), NodePath("Placement Markers/P1_4"), NodePath("Placement Markers/P1_5"), NodePath("Placement Markers/P1_6")]
 p2_marker_banks = [NodePath("Placement Markers/P2_1"), NodePath("Placement Markers/P2_2"), NodePath("Placement Markers/P2_3"), NodePath("Placement Markers/P2_4"), NodePath("Placement Markers/P2_5"), NodePath("Placement Markers/P2_6")]
 p1_marker_home = NodePath("Placement Markers/P1_H")
 p2_marker_home = NodePath("Placement Markers/P2_H")
 arrow_pointer = NodePath("Selection Arrow")
+announcer = NodePath("Announcer")
 p1_cam = NodePath("P1 Cam")
 p2_cam = NodePath("P2 Cam")
 
@@ -400,3 +408,14 @@ script = ExtResource("13_oiwk8")
 level = NodePath("../../../..")
 
 [node name="Announcer" type="AudioStreamPlayer" parent="." unique_id=540410151]
+stream = ExtResource("15_x320b")
+bus = &"announcer"
+script = ExtResource("15_e351d")
+streams = Dictionary[String, AudioStreamMP3]({
+"capture": ExtResource("15_6yaw1"),
+"extra_turn": ExtResource("17_o6mf3"),
+"p1_win": ExtResource("18_x320b"),
+"p2_win": ExtResource("19_4dbp5"),
+"tie": ExtResource("21_4dbp5"),
+"title": ExtResource("15_x320b")
+})

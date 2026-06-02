@@ -11,6 +11,9 @@ extends Node3D
 @export_category("UI")
 @export var arrow_pointer : Sprite3D
 
+@export_category("Audio")
+@export var announcer : AudioStreamPlayer
+
 @export_category("Cameras")
 @export var p1_cam : Camera3D 
 @export var p2_cam : Camera3D
@@ -173,12 +176,15 @@ func check_winner():
 	if p1_marker_home.get_child_count() == p2_marker_home.get_child_count():
 		p1_win = true
 		p2_win = true
+		announcer.tie()
 	elif p1_marker_home.get_child_count() > p2_marker_home.get_child_count():
 		p1_win = true
 		p2_win = false
+		announcer.p1_win()
 	else:
 		p1_win = false
 		p2_win = true
+		announcer.p2_win()
 #endregion
 #region Bank Choice
 func choose_bank():

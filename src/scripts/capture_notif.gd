@@ -9,5 +9,6 @@ func _ready():
 
 func reveal():
 	visible = true
+	level.announcer.capture()
 	await get_tree().create_timer(view_duration).timeout
 	visible = false

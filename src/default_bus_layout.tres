@@ -1,5 +1,25 @@
 [gd_resource type="AudioBusLayout" format=3 uid="uid://cpcrcwewb222w"]
 
+[sub_resource type="AudioEffectDistortion" id="AudioEffectDistortion_j3pel"]
+resource_name = "Distortion"
+mode = 4
+drive = 0.95
+
+[sub_resource type="AudioEffectCompressor" id="AudioEffectCompressor_j3pel"]
+resource_name = "Compressor"
+threshold = -8.0
+
+[sub_resource type="AudioEffectLowPassFilter" id="AudioEffectLowPassFilter_j3pel"]
+resource_name = "LowPassFilter"
+
+[sub_resource type="AudioEffectDelay" id="AudioEffectDelay_j3pel"]
+resource_name = "Delay"
+dry = 0.5
+
+[sub_resource type="AudioEffectPitchShift" id="AudioEffectPitchShift_j3pel"]
+resource_name = "PitchShift"
+pitch_scale = 0.9
+
 [resource]
 bus/1/name = &"Pieces"
 bus/1/solo = false
@@ -7,3 +27,19 @@ bus/1/mute = false
 bus/1/bypass_fx = false
 bus/1/volume_db = -12.461078
 bus/1/send = &"Master"
+bus/2/name = &"announcer"
+bus/2/solo = false
+bus/2/mute = false
+bus/2/bypass_fx = false
+bus/2/volume_db = -3.3244438
+bus/2/send = &"Master"
+bus/2/effect/0/effect = SubResource("AudioEffectDistortion_j3pel")
+bus/2/effect/0/enabled = true
+bus/2/effect/1/effect = SubResource("AudioEffectCompressor_j3pel")
+bus/2/effect/1/enabled = true
+bus/2/effect/2/effect = SubResource("AudioEffectLowPassFilter_j3pel")
+bus/2/effect/2/enabled = true
+bus/2/effect/3/effect = SubResource("AudioEffectDelay_j3pel")
+bus/2/effect/3/enabled = true
+bus/2/effect/4/effect = SubResource("AudioEffectPitchShift_j3pel")
+bus/2/effect/4/enabled = true

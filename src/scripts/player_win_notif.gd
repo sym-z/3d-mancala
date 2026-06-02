@@ -10,10 +10,13 @@ func _ready():
 func reveal(p1_win : bool, p2_win : bool):
 	if p1_win and p2_win:
 		text = "GAME TIE!"
+		level.announcer.tie()
 	elif p1_win:
 		text = "PLAYER ONE WINS!"
+		level.announcer.p1_win()
 	else:
 		text = "PLAYER TWO WINS!"
+		level.announcer.p2_win()
 	visible = true
 	await get_tree().create_timer(view_duration).timeout
 	visible = false
