@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://dwqfgfg5bi2w7" path="res://assets/sprites/tiling_bg.png" id="2_rtw2f"]
 [ext_resource type="Theme" uid="uid://cuagsrjijxb16" path="res://mm_buttons.tres" id="2_wu84c"]
 [ext_resource type="FontFile" uid="uid://c4cxtyqn866dk" path="res://CrayonLibre-BLVel.otf" id="3_8ln24"]
+[ext_resource type="ArrayMesh" uid="uid://dju5dgc06615w" path="res://assets/blends/new_board_clean_Cube_001.tres" id="7_oa1go"]
+[ext_resource type="Script" uid="uid://dc3i58jn05i6h" path="res://scripts/spinny_model.gd" id="8_tbmy8"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tbmy8"]
 shader = ExtResource("1_8ln24")
@@ -42,6 +44,7 @@ script = ExtResource("1_rtw2f")
 play_btn = NodePath("MarginContainer/VBoxContainer/Play")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1088503036]
+modulate = Color(1, 1, 1, 0.39215687)
 material = SubResource("ShaderMaterial_tbmy8")
 layout_mode = 1
 anchors_preset = 15
@@ -124,3 +127,13 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_8ln24")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1888899162]
+mesh = ExtResource("7_oa1go")
+script = ExtResource("8_tbmy8")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="MeshInstance3D" unique_id=826986611]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.40843)
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=190764683]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.07167387, 13.897829)
