@@ -23,6 +23,7 @@ buses/default_bus_layout="uid://cpcrcwewb222w"
 
 CrtFilter="*uid://dthg832imncde"
 SceneTransition="*uid://ccuqih0tepkko"
+Globals="*uid://dn2quldovolv3"
 
 [display]
 

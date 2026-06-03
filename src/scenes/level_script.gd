@@ -17,6 +17,9 @@ extends Node3D
 @export_category("Cameras")
 @export var p1_cam : Camera3D 
 @export var p2_cam : Camera3D
+var active_cam : Camera3D
+var p1_cam_pos : Vector3
+var p2_cam_pos : Vector3
 
 enum TURN {ONE=1,TWO=2}
 var curr_turn : TURN = TURN.ONE
@@ -43,9 +46,13 @@ signal game_over(p1_win : bool, p2_win : bool)
 @export var spread_delay : float = 0.3
 #endregion
 func _ready():
+	spread_delay = Globals.game_speed
 	arrow_pointer.global_position = p1_marker_banks[selected_bank].global_position
 	arrow_pointer.visible = false
 	await board_setup()
+	active_cam = p1_cam
+	p1_cam_pos = p1_cam.global_position
+	p2_cam_pos = p2_cam.global_position
 	arrow_pointer.visible = true
 	arrow_pointer.modulate = Color("LIGHT_SEA_GREEN")
 	game_ready = true
@@ -120,11 +127,13 @@ func swap_turn():
 		curr_turn = TURN.TWO
 		p1_cam.current = false
 		p2_cam.current = true
+		active_cam = p2_cam
 		arrow_pointer.modulate = Color("CRIMSON")
 	else:
 		curr_turn = TURN.ONE
 		p1_cam.current = true
 		p2_cam.current = false
+		active_cam = p1_cam
 		arrow_pointer.modulate = Color("LIGHT_SEA_GREEN")
 
 	# Change arrow to be new selection
@@ -133,6 +142,8 @@ func swap_turn():
 	selected_bank = 0
 	allow_input = true
 	turn_change.emit()
+	p1_cam.global_position = p1_cam_pos
+	p2_cam.global_position = p2_cam_pos
 	
 func check_endgame():
 	var p1_pieces : int = get_p1_total_pieces()
@@ -241,8 +252,9 @@ func choose_bank():
 			if p1_win == false and p2_win == false:
 				extra_turn.emit()
 				allow_input = true
-			
-			
+				# Reset cameras
+				p1_cam.global_position = p1_cam_pos
+				p2_cam.global_position = p2_cam_pos
 		# Landed on own side
 		# You can only capture if you land on "your" side and that is the only piece in there now
 		elif final_bank_num < NUM_BANKS:
@@ -254,12 +266,15 @@ func choose_bank():
 		# Landed in other player's side
 		else:
 			await swap_turn()
+	# Selected bank with 0 pieces
 	else:
 		print("NO PIECES IN SELECTED BANK")
 		allow_input = true
 
 # Similarly to fill banks, used when iterating through banks after choice.
 func place_piece(bank: Marker3D):
+	if Globals.follow_camera:
+		tween_camera(bank.global_position,spread_delay*0.8)
 	var piece_inst : RigidBody3D = piece_scn.instantiate()
 	bank.add_child(piece_inst)
 	piece_inst.global_position = Vector3(bank.global_position.x,bank.global_position.y, bank.global_position.z + randf_range(-piece_inst.pos_variation_magnitude, piece_inst.pos_variation_magnitude))
@@ -294,3 +309,14 @@ func capture_check(bank : Marker3D, index : int):
 		bank.set_manual.emit(0)
 		await get_tree().create_timer(spread_delay/2).timeout
 #endregion
+
+var tween : Tween = null
+func tween_camera(pos: Vector3, duration):
+	tween = get_tree().create_tween()
+	tween.tween_callback(tween_kill)
+	tween.tween_property(active_cam, "global_position", Vector3(pos.x, active_cam.global_position.y, active_cam.global_position.z), duration)
+	tween.play()
+	
+func tween_kill():
+	await tween.finished
+	tween.kill()

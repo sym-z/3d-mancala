@@ -3,7 +3,6 @@ extends AudioStreamPlayer
 
 func announce(name : String):
 	for key in streams.keys():
-		print(key)
 		if name == key:
 			stream = streams[name]
 			play()
