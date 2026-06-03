@@ -15,6 +15,7 @@
 [ext_resource type="AudioStream" uid="uid://dni58lmqlht6f" path="res://assets/audio/p2_win.mp3" id="14_hstxw"]
 [ext_resource type="Shader" uid="uid://b5bov1ito7yf5" path="res://scenes/title.gdshader" id="15_5pajh"]
 [ext_resource type="AudioStream" uid="uid://48bqffl6eiyl" path="res://assets/audio/tie.mp3" id="15_8egab"]
+[ext_resource type="Theme" uid="uid://d2x1lp84g27xq" path="res://mm_menu_box.tres" id="16_5pajh"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tbmy8"]
 shader = ExtResource("4_5pajh")
@@ -44,9 +45,66 @@ expand_margin_top = 32.0
 expand_margin_right = 32.0
 expand_margin_bottom = 32.0
 
+[sub_resource type="Environment" id="Environment_7b55j"]
+background_mode = 1
+background_color = Color(0.22904, 0.1624, 0.28, 1)
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jk1qb"]
 shader = ExtResource("15_5pajh")
 shader_parameter/strength = 20.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j7ex8"]
+shader = ExtResource("4_5pajh")
+shader_parameter/strength = 5.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q6mj1"]
+bg_color = Color(0.41568628, 0.39215687, 0.50980395, 1)
+border_width_bottom = 4
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+expand_margin_left = 8.0
+expand_margin_top = 8.0
+expand_margin_right = 8.0
+expand_margin_bottom = 8.0
+shadow_color = Color(0, 0, 0, 0.16470589)
+shadow_size = 2
+shadow_offset = Vector2(0, -3.65)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7dv2h"]
+bg_color = Color(0.41616, 0.3927, 0.51, 0.5882353)
+border_width_bottom = 8
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+expand_margin_left = 8.0
+expand_margin_top = 8.0
+expand_margin_right = 8.0
+expand_margin_bottom = 8.0
+shadow_color = Color(0, 0, 0, 0.16470589)
+shadow_size = 2
+shadow_offset = Vector2(0, -3.65)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5vu20"]
+bg_color = Color(0.41616, 0.3927, 0.51, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+expand_margin_left = 8.0
+expand_margin_top = 8.0
+expand_margin_right = 8.0
+expand_margin_bottom = 8.0
+
+[sub_resource type="Theme" id="Theme_a8gd2"]
+Button/constants/outline_size = 8
+Button/font_sizes/font_size = 57
+Button/fonts/font = ExtResource("3_8ln24")
+Button/styles/hover = SubResource("StyleBoxFlat_q6mj1")
+Button/styles/normal = SubResource("StyleBoxFlat_7dv2h")
+Button/styles/pressed = SubResource("StyleBoxFlat_5vu20")
 
 [node name="Main Menu" type="Control" unique_id=303553077 node_paths=PackedStringArray("play_btn", "announcer", "model")]
 layout_mode = 3
@@ -147,6 +205,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.40843)
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=190764683]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.07167387, 13.897829)
+environment = SubResource("Environment_7b55j")
 
 [node name="Announcer" type="AudioStreamPlayer" parent="." unique_id=1153770920]
 stream = ExtResource("9_7b55j")
@@ -178,30 +237,69 @@ text = "MANCALA
 horizontal_alignment = 1
 
 [node name="Settings Container" type="MarginContainer" parent="." unique_id=1411205104]
+z_index = 1
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 0
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 0
-theme_override_constants/margin_bottom = 0
+theme_override_constants/margin_left = 281
+theme_override_constants/margin_top = 123
+theme_override_constants/margin_right = 281
+theme_override_constants/margin_bottom = 123
 
 [node name="PanelContainer2" type="PanelContainer" parent="Settings Container" unique_id=789466884]
 layout_mode = 2
+theme = ExtResource("16_5pajh")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Settings Container/PanelContainer2" unique_id=347886071]
+[node name="VBoxContainer2" type="VBoxContainer" parent="Settings Container/PanelContainer2" unique_id=1397227330]
 layout_mode = 2
+theme_override_constants/separation = 28
 
-[node name="Label" type="Label" parent="Settings Container/PanelContainer2/VBoxContainer" unique_id=1663598464]
+[node name="VBoxContainer" type="VBoxContainer" parent="Settings Container/PanelContainer2/VBoxContainer2" unique_id=347886071]
 layout_mode = 2
+theme_override_constants/separation = 1
 
-[node name="CheckButton" type="CheckButton" parent="Settings Container/PanelContainer2/VBoxContainer" unique_id=589099492]
+[node name="Label" type="Label" parent="Settings Container/PanelContainer2/VBoxContainer2/VBoxContainer" unique_id=1663598464]
 layout_mode = 2
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("3_8ln24")
+theme_override_font_sizes/font_size = 64
+text = "SETTINGS"
+horizontal_alignment = 1
 
-[node name="HSlider" type="HSlider" parent="Settings Container/PanelContainer2/VBoxContainer" unique_id=1255820310]
+[node name="Active Cam Label" type="Label" parent="Settings Container/PanelContainer2/VBoxContainer2/VBoxContainer" unique_id=1055179364]
+layout_mode = 2
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("3_8ln24")
+theme_override_font_sizes/font_size = 32
+text = "ACTIVE CAM"
+horizontal_alignment = 1
+
+[node name="CheckBox" type="CheckBox" parent="Settings Container/PanelContainer2/VBoxContainer2/VBoxContainer" unique_id=1275593969]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Speed Label" type="Label" parent="Settings Container/PanelContainer2/VBoxContainer2/VBoxContainer" unique_id=1765486136]
+layout_mode = 2
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("3_8ln24")
+theme_override_font_sizes/font_size = 32
+text = "GAME SPEED"
+horizontal_alignment = 1
+
+[node name="Speed Meter" type="HSlider" parent="Settings Container/PanelContainer2/VBoxContainer2/VBoxContainer" unique_id=1255820310]
 custom_minimum_size = Vector2(209.43, 0)
 layout_mode = 2
 size_flags_horizontal = 4
+max_value = 0.6
+step = 0.1
+value = 0.3
+
+[node name="Back" type="Button" parent="Settings Container/PanelContainer2/VBoxContainer2" unique_id=787669278]
+material = SubResource("ShaderMaterial_j7ex8")
+layout_mode = 2
+size_flags_horizontal = 4
+theme = SubResource("Theme_a8gd2")
+text = "BACK"

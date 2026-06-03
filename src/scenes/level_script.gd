@@ -56,7 +56,7 @@ func _ready():
 	arrow_pointer.visible = true
 	arrow_pointer.modulate = Color("LIGHT_SEA_GREEN")
 	game_ready = true
-	allow_input = true
+	allow_input = true 
 #region Game Setup
 func board_setup():
 	# Fill each players side with STARTING_AMT pieces.
@@ -69,7 +69,9 @@ func fill_bank(bank_arr : Array[Marker3D]):
 			var piece_inst : RigidBody3D = piece_scn.instantiate()
 			bank.add_child(piece_inst)
 			piece_inst.global_position = Vector3(bank.global_position.x,bank.global_position.y, bank.global_position.z + randf_range(-piece_inst.pos_variation_magnitude, piece_inst.pos_variation_magnitude))
+			bank.bank_updated.emit()
 			await get_tree().create_timer(spread_delay/2).timeout
+			
 #endregion
 #region Input Handling
 func _input(event):
@@ -252,9 +254,8 @@ func choose_bank():
 			if p1_win == false and p2_win == false:
 				extra_turn.emit()
 				allow_input = true
-				# Reset cameras
-				p1_cam.global_position = p1_cam_pos
-				p2_cam.global_position = p2_cam_pos
+				if Globals.follow_camera:
+					reset_camera()
 		# Landed on own side
 		# You can only capture if you land on "your" side and that is the only piece in there now
 		elif final_bank_num < NUM_BANKS:
@@ -316,7 +317,12 @@ func tween_camera(pos: Vector3, duration):
 	tween.tween_callback(tween_kill)
 	tween.tween_property(active_cam, "global_position", Vector3(pos.x, active_cam.global_position.y, active_cam.global_position.z), duration)
 	tween.play()
-	
+
+func reset_camera():
+	if active_cam == p1_cam:
+		tween_camera(p2_cam_pos,spread_delay*0.8)
+	else:
+		tween_camera(p2_cam_pos,spread_delay*0.8)
 func tween_kill():
 	await tween.finished
 	tween.kill()
