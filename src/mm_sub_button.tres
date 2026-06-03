@@ -1,0 +1,52 @@
+[gd_resource type="Theme" format=3 uid="uid://bgjtwfvuj4wph"]
+
+[ext_resource type="FontFile" uid="uid://c4cxtyqn866dk" path="res://CrayonLibre-BLVel.otf" id="1_kvcwl"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q6mj1"]
+bg_color = Color(0.41568628, 0.39215687, 0.50980395, 1)
+border_width_bottom = 4
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+expand_margin_left = 8.0
+expand_margin_top = 8.0
+expand_margin_right = 8.0
+expand_margin_bottom = 8.0
+shadow_color = Color(0, 0, 0, 0.16470589)
+shadow_size = 2
+shadow_offset = Vector2(0, -3.65)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7dv2h"]
+bg_color = Color(0.41616, 0.3927, 0.51, 0.5882353)
+border_width_bottom = 8
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+expand_margin_left = 8.0
+expand_margin_top = 8.0
+expand_margin_right = 8.0
+expand_margin_bottom = 8.0
+shadow_color = Color(0, 0, 0, 0.16470589)
+shadow_size = 2
+shadow_offset = Vector2(0, -3.65)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5vu20"]
+bg_color = Color(0.41616, 0.3927, 0.51, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+expand_margin_left = 8.0
+expand_margin_top = 8.0
+expand_margin_right = 8.0
+expand_margin_bottom = 8.0
+
+[resource]
+Button/constants/outline_size = 8
+Button/font_sizes/font_size = 37
+Button/fonts/font = ExtResource("1_kvcwl")
+Button/styles/hover = SubResource("StyleBoxFlat_q6mj1")
+Button/styles/normal = SubResource("StyleBoxFlat_7dv2h")
+Button/styles/pressed = SubResource("StyleBoxFlat_5vu20")

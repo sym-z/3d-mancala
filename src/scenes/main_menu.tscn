@@ -2,9 +2,10 @@
 
 [ext_resource type="Script" uid="uid://dply5k7iybiq" path="res://scenes/main_menu.gd" id="1_rtw2f"]
 [ext_resource type="Texture2D" uid="uid://dwqfgfg5bi2w7" path="res://assets/sprites/tiling_bg.png" id="2_rtw2f"]
-[ext_resource type="Theme" uid="uid://cuagsrjijxb16" path="res://mm_buttons.tres" id="2_wu84c"]
 [ext_resource type="FontFile" uid="uid://c4cxtyqn866dk" path="res://CrayonLibre-BLVel.otf" id="3_8ln24"]
 [ext_resource type="Shader" uid="uid://c6o6g5scoqwur" path="res://button_jiggle.gdshader" id="4_5pajh"]
+[ext_resource type="Theme" uid="uid://bqhe1gt4evm8w" path="res://play_button.tres" id="4_a8gd2"]
+[ext_resource type="Theme" uid="uid://bgjtwfvuj4wph" path="res://mm_sub_button.tres" id="5_hstxw"]
 [ext_resource type="ArrayMesh" uid="uid://dju5dgc06615w" path="res://assets/blends/new_board_clean_Cube_001.tres" id="7_oa1go"]
 [ext_resource type="Script" uid="uid://dc3i58jn05i6h" path="res://scripts/spinny_model.gd" id="8_tbmy8"]
 [ext_resource type="AudioStream" uid="uid://bw0m7xn8a7ore" path="res://assets/audio/title_1.mp3" id="9_7b55j"]
@@ -19,6 +20,10 @@
 [ext_resource type="Script" uid="uid://diakhf4xw6vll" path="res://scripts/settings_container.gd" id="16_j7ex8"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tbmy8"]
+shader = ExtResource("4_5pajh")
+shader_parameter/strength = 5.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a8gd2"]
 shader = ExtResource("4_5pajh")
 shader_parameter/strength = 5.0
 
@@ -116,8 +121,8 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_rtw2f")
-play_btn = NodePath("MarginContainer/VBoxContainer/Play")
-settings_btn = NodePath("MarginContainer/VBoxContainer/Settings")
+play_btn = NodePath("MarginContainer/HBoxContainer/Play")
+settings_btn = NodePath("MarginContainer/HBoxContainer/Settings")
 announcer = NodePath("Announcer")
 fade_time = 0.5
 model = NodePath("MeshInstance3D")
@@ -145,33 +150,36 @@ offset_bottom = 8.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-theme_override_constants/margin_top = 242
-theme_override_constants/margin_right = 615
-theme_override_constants/margin_bottom = 242
+theme_override_constants/margin_top = 377
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=723778061]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=2087031086]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 32
 alignment = 1
 
-[node name="Play" type="Button" parent="MarginContainer/VBoxContainer" unique_id=1510958586]
+[node name="Controls" type="Button" parent="MarginContainer/HBoxContainer" unique_id=422067149]
+material = SubResource("ShaderMaterial_a8gd2")
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("5_hstxw")
+text = "CONTROLS"
+
+[node name="Play" type="Button" parent="MarginContainer/HBoxContainer" unique_id=1510958586]
 material = SubResource("ShaderMaterial_rtw2f")
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
-theme = ExtResource("2_wu84c")
+theme = ExtResource("4_a8gd2")
 text = "PLAY"
 
-[node name="Controls" type="Button" parent="MarginContainer/VBoxContainer" unique_id=422067149]
-layout_mode = 2
-
-[node name="Settings" type="Button" parent="MarginContainer/VBoxContainer" unique_id=455389478]
+[node name="Settings" type="Button" parent="MarginContainer/HBoxContainer" unique_id=455389478]
 material = SubResource("ShaderMaterial_oa1go")
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme = ExtResource("2_wu84c")
+theme = ExtResource("5_hstxw")
 text = "SETTINGS"
 
 [node name="MarginContainer2" type="MarginContainer" parent="." unique_id=1320514531]
@@ -226,13 +234,13 @@ streams = Dictionary[String, AudioStreamMP3]({
 "title": ExtResource("9_7b55j")
 })
 
-[node name="Label" type="Label" parent="." unique_id=1070955053]
+[node name="Title" type="Label" parent="." unique_id=1070955053]
 material = SubResource("ShaderMaterial_jk1qb")
 layout_mode = 0
-offset_left = 309.0
-offset_top = 127.0
-offset_right = 1190.0
-offset_bottom = 610.0
+offset_left = 141.0
+offset_top = 34.0
+offset_right = 1022.0
+offset_bottom = 517.0
 size_flags_vertical = 6
 theme_override_colors/font_color = Color(1, 1, 1, 0.5882353)
 theme_override_constants/outline_size = 12
