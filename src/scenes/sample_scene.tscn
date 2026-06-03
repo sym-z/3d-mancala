@@ -4,7 +4,6 @@
 [ext_resource type="Shader" uid="uid://c076opqv751uh" path="res://sky.gdshader" id="3_1o07t"]
 [ext_resource type="PackedScene" uid="uid://vymfgnav1j6r" path="res://scenes/new_board.tscn" id="3_l4noq"]
 [ext_resource type="Texture2D" uid="uid://dwqfgfg5bi2w7" path="res://assets/sprites/tiling_bg.png" id="4_s5ll8"]
-[ext_resource type="PackedScene" uid="uid://dx40hiqxmxc4x" path="res://scenes/game_piece.tscn" id="4_udu4s"]
 [ext_resource type="Script" uid="uid://b3hl5psd3m3ob" path="res://scripts/placement_marker.gd" id="5_kg8jk"]
 [ext_resource type="Texture2D" uid="uid://ms4b8vqdfki" path="res://assets/sprites/arrow.png" id="6_6idux"]
 [ext_resource type="PackedScene" uid="uid://ckyorgxr70rcw" path="res://scenes/bank_label.tscn" id="7_oiwk8"]
@@ -185,10 +184,6 @@ environment = SubResource("Environment_xur8e")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1660986940]
 transform = Transform3D(1, 0, 0, 0, 0.12663184, 0.9919498, 0, -0.9919498, 0.12663184, 0, 1.777168, 0)
 
-[node name="GamePiece" parent="." unique_id=1529533771 instance=ExtResource("4_udu4s")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5695777, 0.48364103, 0.552125)
-visible = false
-
 [node name="Placement Markers" type="Node3D" parent="." unique_id=22633479]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.51, 0)
 
@@ -283,7 +278,6 @@ bank_reference = NodePath("../../Placement Markers/P1_6")
 
 [node name="P1_H" parent="Bank Labels" unique_id=518989739 node_paths=PackedStringArray("bank_reference") instance=ExtResource("7_oiwk8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.8908675, 0.33497983, 0.0947777)
-text = "0"
 bank_reference = NodePath("../../Placement Markers/P1_H")
 
 [node name="P2_1" parent="Bank Labels" unique_id=904960078 node_paths=PackedStringArray("bank_reference") instance=ExtResource("7_oiwk8")]
@@ -312,7 +306,6 @@ bank_reference = NodePath("../../Placement Markers/P2_6")
 
 [node name="P2_H" parent="Bank Labels" unique_id=141305793 node_paths=PackedStringArray("bank_reference") instance=ExtResource("7_oiwk8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.9587576, 0.3349796, 0.053915024)
-text = "0"
 bank_reference = NodePath("../../Placement Markers/P2_H")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=25584112]
