@@ -2,6 +2,7 @@ extends Label
 
 @export var level : Node3D
 @export var view_duration : float = 3.0
+@export var post_game_messages : CenterContainer
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	visible = false
@@ -20,5 +21,5 @@ func reveal(p1_win : bool, p2_win : bool):
 	visible = true
 	await get_tree().create_timer(view_duration).timeout
 	visible = false
-	await get_tree().create_timer(10.0).timeout
-	SceneTransition.main_menu()
+	post_game_messages.reveal()
+	

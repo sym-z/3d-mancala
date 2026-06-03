@@ -18,6 +18,8 @@
 [ext_resource type="AudioStream" uid="uid://bhwahdgj138ai" path="res://assets/audio/capture.mp3" id="15_6yaw1"]
 [ext_resource type="Script" uid="uid://dagfgovf0ki1c" path="res://scripts/announcer.gd" id="15_e351d"]
 [ext_resource type="AudioStream" uid="uid://bw0m7xn8a7ore" path="res://assets/audio/title_1.mp3" id="15_x320b"]
+[ext_resource type="Theme" uid="uid://cuagsrjijxb16" path="res://mm_buttons.tres" id="16_f02yu"]
+[ext_resource type="Script" uid="uid://dma8xqq7id3wq" path="res://scripts/post_game_messages.gd" id="16_g2i3f"]
 [ext_resource type="AudioStream" uid="uid://3xv6scvmps4l" path="res://assets/audio/extra_turn_2.mp3" id="17_o6mf3"]
 [ext_resource type="AudioStream" uid="uid://dlc76p4rcnav6" path="res://assets/audio/p1_win.mp3" id="18_x320b"]
 [ext_resource type="AudioStream" uid="uid://dni58lmqlht6f" path="res://assets/audio/p2_win.mp3" id="19_4dbp5"]
@@ -86,6 +88,14 @@ shader = ExtResource("9_x320b")
 shader_parameter/strength = 5.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_l4noq"]
+shader = ExtResource("9_x320b")
+shader_parameter/strength = 5.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g2i3f"]
+shader = ExtResource("9_x320b")
+shader_parameter/strength = 5.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c4gr1"]
 shader = ExtResource("9_x320b")
 shader_parameter/strength = 5.0
 
@@ -315,7 +325,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control" unique_id=1161309195]
+[node name="Player Turn Container" type="MarginContainer" parent="CanvasLayer/Control" unique_id=1161309195]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -325,10 +335,10 @@ grow_vertical = 2
 theme_override_constants/margin_left = 22
 theme_override_constants/margin_top = 580
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/MarginContainer" unique_id=942481063]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/Player Turn Container" unique_id=942481063]
 layout_mode = 2
 
-[node name="Player Turn Label" type="Label" parent="CanvasLayer/Control/MarginContainer/VBoxContainer" unique_id=1869901986 node_paths=PackedStringArray("level")]
+[node name="Player Turn Label" type="Label" parent="CanvasLayer/Control/Player Turn Container/VBoxContainer" unique_id=1869901986 node_paths=PackedStringArray("level")]
 material = SubResource("ShaderMaterial_oiwk8")
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -390,7 +400,7 @@ script = ExtResource("11_kg8jk")
 level = NodePath("../../..")
 view_duration = 0.75
 
-[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/Control" unique_id=1379378633]
+[node name="Win Container" type="CenterContainer" parent="CanvasLayer/Control" unique_id=1379378633]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -398,7 +408,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Player Win Notif" type="Label" parent="CanvasLayer/Control/CenterContainer" unique_id=1363220861 node_paths=PackedStringArray("level")]
+[node name="Player Win Notif" type="Label" parent="CanvasLayer/Control/Win Container" unique_id=1363220861 node_paths=PackedStringArray("level", "post_game_messages")]
 material = SubResource("ShaderMaterial_l4noq")
 layout_mode = 2
 theme_override_constants/outline_size = 8
@@ -408,6 +418,36 @@ text = "Player X Wins!"
 uppercase = true
 script = ExtResource("13_oiwk8")
 level = NodePath("../../../..")
+post_game_messages = NodePath("../../Post Game Messages")
+
+[node name="Post Game Messages" type="CenterContainer" parent="CanvasLayer/Control" unique_id=1684606117 node_paths=PackedStringArray("menu_btn")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("16_g2i3f")
+menu_btn = NodePath("VBoxContainer/Menu Button")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/Post Game Messages" unique_id=1644753566]
+layout_mode = 2
+theme_override_constants/separation = 38
+
+[node name="Slam Message" type="Label" parent="CanvasLayer/Control/Post Game Messages/VBoxContainer" unique_id=1851793790]
+material = SubResource("ShaderMaterial_g2i3f")
+layout_mode = 2
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("8_udu4s")
+theme_override_font_sizes/font_size = 98
+text = "(S) SLAM BOARD"
+horizontal_alignment = 1
+
+[node name="Menu Button" type="Button" parent="CanvasLayer/Control/Post Game Messages/VBoxContainer" unique_id=1612836393]
+material = SubResource("ShaderMaterial_c4gr1")
+layout_mode = 2
+theme = ExtResource("16_f02yu")
+text = "BACK TO MENU?"
 
 [node name="Announcer" type="AudioStreamPlayer" parent="." unique_id=540410151]
 stream = ExtResource("15_x320b")

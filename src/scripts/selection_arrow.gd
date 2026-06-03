@@ -12,7 +12,6 @@ var speed : float = 2.
 func _process(delta):
 	time += delta
 	var factor : float = (sin(time*speed)/6)+0.7
-	print("COLOR BEFORE: ", modulate, " COLOR AFTER: " , Color(factor,factor,factor * factor,1),1)
 	modulate.v = factor
 
 
