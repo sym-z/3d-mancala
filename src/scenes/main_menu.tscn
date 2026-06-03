@@ -16,6 +16,7 @@
 [ext_resource type="Shader" uid="uid://b5bov1ito7yf5" path="res://scenes/title.gdshader" id="15_5pajh"]
 [ext_resource type="AudioStream" uid="uid://48bqffl6eiyl" path="res://assets/audio/tie.mp3" id="15_8egab"]
 [ext_resource type="Theme" uid="uid://d2x1lp84g27xq" path="res://mm_menu_box.tres" id="16_5pajh"]
+[ext_resource type="Script" uid="uid://diakhf4xw6vll" path="res://scripts/settings_container.gd" id="16_j7ex8"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tbmy8"]
 shader = ExtResource("4_5pajh")
@@ -106,7 +107,7 @@ Button/styles/hover = SubResource("StyleBoxFlat_q6mj1")
 Button/styles/normal = SubResource("StyleBoxFlat_7dv2h")
 Button/styles/pressed = SubResource("StyleBoxFlat_5vu20")
 
-[node name="Main Menu" type="Control" unique_id=303553077 node_paths=PackedStringArray("play_btn", "announcer", "model")]
+[node name="Main Menu" type="Control" unique_id=303553077 node_paths=PackedStringArray("play_btn", "settings_btn", "announcer", "model", "settings_container")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -116,9 +117,11 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_rtw2f")
 play_btn = NodePath("MarginContainer/VBoxContainer/Play")
+settings_btn = NodePath("MarginContainer/VBoxContainer/Settings")
 announcer = NodePath("Announcer")
 fade_time = 0.5
 model = NodePath("MeshInstance3D")
+settings_container = NodePath("Settings Window Container")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1088503036]
 modulate = Color(1, 1, 1, 0.39215687)
@@ -159,6 +162,9 @@ size_flags_horizontal = 4
 size_flags_vertical = 6
 theme = ExtResource("2_wu84c")
 text = "PLAY"
+
+[node name="Controls" type="Button" parent="MarginContainer/VBoxContainer" unique_id=422067149]
+layout_mode = 2
 
 [node name="Settings" type="Button" parent="MarginContainer/VBoxContainer" unique_id=455389478]
 material = SubResource("ShaderMaterial_oa1go")
@@ -236,7 +242,8 @@ text = "MANCALA
 64"
 horizontal_alignment = 1
 
-[node name="Settings Container" type="MarginContainer" parent="." unique_id=1411205104]
+[node name="Settings Window Container" type="MarginContainer" parent="." unique_id=1411205104 node_paths=PackedStringArray("active_setting", "speed_setting", "back_btn")]
+visible = false
 z_index = 1
 layout_mode = 1
 anchors_preset = 15
@@ -248,20 +255,24 @@ theme_override_constants/margin_left = 281
 theme_override_constants/margin_top = 123
 theme_override_constants/margin_right = 281
 theme_override_constants/margin_bottom = 123
+script = ExtResource("16_j7ex8")
+active_setting = NodePath("PanelContainer2/VBoxContainer2/VBoxContainer/CheckBox")
+speed_setting = NodePath("PanelContainer2/VBoxContainer2/VBoxContainer/Speed Meter")
+back_btn = NodePath("PanelContainer2/VBoxContainer2/Back")
 
-[node name="PanelContainer2" type="PanelContainer" parent="Settings Container" unique_id=789466884]
+[node name="PanelContainer2" type="PanelContainer" parent="Settings Window Container" unique_id=789466884]
 layout_mode = 2
 theme = ExtResource("16_5pajh")
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="Settings Container/PanelContainer2" unique_id=1397227330]
+[node name="VBoxContainer2" type="VBoxContainer" parent="Settings Window Container/PanelContainer2" unique_id=1397227330]
 layout_mode = 2
 theme_override_constants/separation = 28
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Settings Container/PanelContainer2/VBoxContainer2" unique_id=347886071]
+[node name="VBoxContainer" type="VBoxContainer" parent="Settings Window Container/PanelContainer2/VBoxContainer2" unique_id=347886071]
 layout_mode = 2
 theme_override_constants/separation = 1
 
-[node name="Label" type="Label" parent="Settings Container/PanelContainer2/VBoxContainer2/VBoxContainer" unique_id=1663598464]
+[node name="Label" type="Label" parent="Settings Window Container/PanelContainer2/VBoxContainer2/VBoxContainer" unique_id=1663598464]
 layout_mode = 2
 theme_override_constants/outline_size = 8
 theme_override_fonts/font = ExtResource("3_8ln24")
@@ -269,7 +280,7 @@ theme_override_font_sizes/font_size = 64
 text = "SETTINGS"
 horizontal_alignment = 1
 
-[node name="Active Cam Label" type="Label" parent="Settings Container/PanelContainer2/VBoxContainer2/VBoxContainer" unique_id=1055179364]
+[node name="Active Cam Label" type="Label" parent="Settings Window Container/PanelContainer2/VBoxContainer2/VBoxContainer" unique_id=1055179364]
 layout_mode = 2
 theme_override_constants/outline_size = 5
 theme_override_fonts/font = ExtResource("3_8ln24")
@@ -277,11 +288,12 @@ theme_override_font_sizes/font_size = 32
 text = "ACTIVE CAM"
 horizontal_alignment = 1
 
-[node name="CheckBox" type="CheckBox" parent="Settings Container/PanelContainer2/VBoxContainer2/VBoxContainer" unique_id=1275593969]
+[node name="CheckBox" type="CheckBox" parent="Settings Window Container/PanelContainer2/VBoxContainer2/VBoxContainer" unique_id=1275593969]
 layout_mode = 2
 size_flags_horizontal = 4
+button_pressed = true
 
-[node name="Speed Label" type="Label" parent="Settings Container/PanelContainer2/VBoxContainer2/VBoxContainer" unique_id=1765486136]
+[node name="Speed Label" type="Label" parent="Settings Window Container/PanelContainer2/VBoxContainer2/VBoxContainer" unique_id=1765486136]
 layout_mode = 2
 theme_override_constants/outline_size = 5
 theme_override_fonts/font = ExtResource("3_8ln24")
@@ -289,15 +301,15 @@ theme_override_font_sizes/font_size = 32
 text = "GAME SPEED"
 horizontal_alignment = 1
 
-[node name="Speed Meter" type="HSlider" parent="Settings Container/PanelContainer2/VBoxContainer2/VBoxContainer" unique_id=1255820310]
+[node name="Speed Meter" type="HSlider" parent="Settings Window Container/PanelContainer2/VBoxContainer2/VBoxContainer" unique_id=1255820310]
 custom_minimum_size = Vector2(209.43, 0)
 layout_mode = 2
 size_flags_horizontal = 4
-max_value = 0.6
+min_value = -0.3
+max_value = 0.3
 step = 0.1
-value = 0.3
 
-[node name="Back" type="Button" parent="Settings Container/PanelContainer2/VBoxContainer2" unique_id=787669278]
+[node name="Back" type="Button" parent="Settings Window Container/PanelContainer2/VBoxContainer2" unique_id=787669278]
 material = SubResource("ShaderMaterial_j7ex8")
 layout_mode = 2
 size_flags_horizontal = 4

@@ -47,6 +47,7 @@ signal game_over(p1_win : bool, p2_win : bool)
 #endregion
 func _ready():
 	spread_delay = Globals.game_speed
+	print("SPREAD DELAY IS: ", spread_delay)
 	arrow_pointer.global_position = p1_marker_banks[selected_bank].global_position
 	arrow_pointer.visible = false
 	await board_setup()
