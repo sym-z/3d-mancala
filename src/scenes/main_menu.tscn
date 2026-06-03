@@ -103,7 +103,6 @@ theme = ExtResource("2_wu84c")
 text = "PLAY"
 
 [node name="Settings" type="Button" parent="MarginContainer/VBoxContainer" unique_id=455389478]
-visible = false
 material = SubResource("ShaderMaterial_oa1go")
 layout_mode = 2
 size_flags_horizontal = 4
