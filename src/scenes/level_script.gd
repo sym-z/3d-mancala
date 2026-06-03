@@ -47,6 +47,7 @@ func _ready():
 	arrow_pointer.visible = false
 	await board_setup()
 	arrow_pointer.visible = true
+	arrow_pointer.modulate = Color("LIGHT_SEA_GREEN")
 	game_ready = true
 	allow_input = true
 #region Game Setup
@@ -119,10 +120,12 @@ func swap_turn():
 		curr_turn = TURN.TWO
 		p1_cam.current = false
 		p2_cam.current = true
+		arrow_pointer.modulate = Color("CRIMSON")
 	else:
 		curr_turn = TURN.ONE
 		p1_cam.current = true
 		p2_cam.current = false
+		arrow_pointer.modulate = Color("LIGHT_SEA_GREEN")
 
 	# Change arrow to be new selection
 	set_selection(0)
