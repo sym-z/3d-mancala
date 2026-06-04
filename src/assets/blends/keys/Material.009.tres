@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://dilwb8nmv7ew2"]
+
+[ext_resource type="Texture2D" uid="uid://quwsw3uh6rfc" path="res://assets/sprites/key_tex4.png" id="1_xsom7"]
+
+[resource]
+resource_name = "Material.009"
+cull_mode = 2
+albedo_texture = ExtResource("1_xsom7")
+roughness = 0.5

@@ -18,6 +18,12 @@
 [ext_resource type="AudioStream" uid="uid://48bqffl6eiyl" path="res://assets/audio/tie.mp3" id="15_8egab"]
 [ext_resource type="Theme" uid="uid://d2x1lp84g27xq" path="res://mm_menu_box.tres" id="16_5pajh"]
 [ext_resource type="Script" uid="uid://diakhf4xw6vll" path="res://scripts/settings_container.gd" id="16_j7ex8"]
+[ext_resource type="Script" uid="uid://bqpnyj0w7v72r" path="res://scripts/controls_window_container.gd" id="19_8egab"]
+[ext_resource type="FontFile" uid="uid://kfcm4t0c1s1f" path="res://assets/blends/CrayonLibre-BLVel.otf" id="19_hstxw"]
+[ext_resource type="ArrayMesh" uid="uid://djnifja2gfq8l" path="res://assets/blends/keys/keys_final_Cube_006.res" id="21_qywvv"]
+[ext_resource type="ArrayMesh" uid="uid://ceogpoiw455po" path="res://assets/blends/keys/keys_final_Cube_007.res" id="22_3wgol"]
+[ext_resource type="ArrayMesh" uid="uid://l1pgkah34afb" path="res://assets/blends/keys/keys_final_Cube_008.res" id="23_1acrt"]
+[ext_resource type="ArrayMesh" uid="uid://hbiyg5ca86or" path="res://assets/blends/keys/keys_final_Cube_009.res" id="24_vr8o3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tbmy8"]
 shader = ExtResource("4_5pajh")
@@ -280,7 +286,7 @@ theme_override_constants/separation = 28
 layout_mode = 2
 theme_override_constants/separation = 1
 
-[node name="Label" type="Label" parent="Settings Window Container/PanelContainer2/VBoxContainer2/VBoxContainer" unique_id=1663598464]
+[node name="Title" type="Label" parent="Settings Window Container/PanelContainer2/VBoxContainer2/VBoxContainer" unique_id=1663598464]
 layout_mode = 2
 theme_override_constants/outline_size = 8
 theme_override_fonts/font = ExtResource("3_8ln24")
@@ -316,6 +322,7 @@ size_flags_horizontal = 4
 min_value = -0.3
 max_value = 0.3
 step = 0.1
+value = -0.3
 
 [node name="Back" type="Button" parent="Settings Window Container/PanelContainer2/VBoxContainer2" unique_id=787669278]
 material = SubResource("ShaderMaterial_j7ex8")
@@ -323,3 +330,73 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme = SubResource("Theme_a8gd2")
 text = "BACK"
+
+[node name="Controls Window Container" type="MarginContainer" parent="." unique_id=107935336]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 281
+theme_override_constants/margin_top = 123
+theme_override_constants/margin_right = 231
+theme_override_constants/margin_bottom = 123
+script = ExtResource("19_8egab")
+
+[node name="PanelContainer" type="PanelContainer" parent="Controls Window Container" unique_id=1086263172]
+layout_mode = 2
+theme = ExtResource("16_5pajh")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Controls Window Container/PanelContainer" unique_id=463355189]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Controls Window Container/PanelContainer/VBoxContainer" unique_id=780191601]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Controls Window Container/PanelContainer/VBoxContainer/VBoxContainer" unique_id=611833016]
+layout_mode = 2
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("19_hstxw")
+theme_override_font_sizes/font_size = 64
+text = "CONTROLS"
+horizontal_alignment = 1
+
+[node name="Back" type="Button" parent="Controls Window Container/PanelContainer/VBoxContainer" unique_id=613127374]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = SubResource("Theme_a8gd2")
+text = "BACK"
+
+[node name="TextureRect2" type="TextureRect" parent="." unique_id=1469713328]
+z_index = 5
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewport" type="SubViewport" parent="TextureRect2" unique_id=875993635]
+
+[node name="KeysFinalCube006" type="MeshInstance3D" parent="TextureRect2/SubViewport" unique_id=1011791620]
+transform = Transform3D(0.515, 0, 0, 0, -2.2511365e-08, -0.515, 0, 0.515, -2.2511365e-08, -41.67791, 0, 8.726749)
+mesh = ExtResource("21_qywvv")
+
+[node name="KeysFinalCube007" type="MeshInstance3D" parent="TextureRect2/SubViewport" unique_id=636263707]
+transform = Transform3D(0.515, 0, 0, 0, -2.2511365e-08, -0.515, 0, 0.515, -2.2511365e-08, -38.587906, 0, 8.726749)
+mesh = ExtResource("22_3wgol")
+
+[node name="KeysFinalCube008" type="MeshInstance3D" parent="TextureRect2/SubViewport" unique_id=1959769371]
+transform = Transform3D(0.515, 0, 0, 0, -2.2511365e-08, -0.515, 0, 0.515, -2.2511365e-08, -40.132908, 0, 8.726749)
+mesh = ExtResource("23_1acrt")
+
+[node name="KeysFinalCube009" type="MeshInstance3D" parent="TextureRect2/SubViewport" unique_id=246257427]
+transform = Transform3D(0.515, 0, 0, 0, -2.2511365e-08, -0.515, 0, 0.515, -2.2511365e-08, -40.132908, 1.545, 8.726749)
+mesh = ExtResource("24_vr8o3")
+
+[node name="Camera3D" type="Camera3D" parent="TextureRect2/SubViewport" unique_id=1635479807]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40.132908, 0, 12.419304)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="TextureRect2/SubViewport" unique_id=792131772]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.97777, 0, 12.774757)

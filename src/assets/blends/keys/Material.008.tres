@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://dept3bdy78rbw"]
+
+[ext_resource type="Texture2D" uid="uid://4yewj4sih1wq" path="res://assets/sprites/key_tex2.png" id="1_maurt"]
+
+[resource]
+resource_name = "Material.008"
+cull_mode = 2
+albedo_texture = ExtResource("1_maurt")
+roughness = 0.5
