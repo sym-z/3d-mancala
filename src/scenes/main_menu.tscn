@@ -20,10 +20,10 @@
 [ext_resource type="Script" uid="uid://diakhf4xw6vll" path="res://scripts/settings_container.gd" id="16_j7ex8"]
 [ext_resource type="Script" uid="uid://bqpnyj0w7v72r" path="res://scripts/controls_window_container.gd" id="19_8egab"]
 [ext_resource type="FontFile" uid="uid://kfcm4t0c1s1f" path="res://assets/blends/CrayonLibre-BLVel.otf" id="19_hstxw"]
-[ext_resource type="ArrayMesh" uid="uid://djnifja2gfq8l" path="res://assets/blends/keys/keys_final_Cube_006.res" id="21_qywvv"]
-[ext_resource type="ArrayMesh" uid="uid://ceogpoiw455po" path="res://assets/blends/keys/keys_final_Cube_007.res" id="22_3wgol"]
-[ext_resource type="ArrayMesh" uid="uid://l1pgkah34afb" path="res://assets/blends/keys/keys_final_Cube_008.res" id="23_1acrt"]
-[ext_resource type="ArrayMesh" uid="uid://hbiyg5ca86or" path="res://assets/blends/keys/keys_final_Cube_009.res" id="24_vr8o3"]
+[ext_resource type="ArrayMesh" uid="uid://d0veyw7ni34de" path="res://assets/blends/keys/keys_final_Cube_006.res" id="21_qywvv"]
+[ext_resource type="ArrayMesh" uid="uid://bmq2jchjknspt" path="res://assets/blends/keys/keys_final_Cube_007.res" id="22_3wgol"]
+[ext_resource type="ArrayMesh" uid="uid://b0hvvh8h5gspx" path="res://assets/blends/keys/keys_final_Cube_008.res" id="23_1acrt"]
+[ext_resource type="ArrayMesh" uid="uid://dkfdgils1s7rj" path="res://assets/blends/keys/keys_final_Cube_009.res" id="24_vr8o3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tbmy8"]
 shader = ExtResource("4_5pajh")
@@ -117,6 +117,13 @@ Button/fonts/font = ExtResource("3_8ln24")
 Button/styles/hover = SubResource("StyleBoxFlat_q6mj1")
 Button/styles/normal = SubResource("StyleBoxFlat_7dv2h")
 Button/styles/pressed = SubResource("StyleBoxFlat_5vu20")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_qywvv"]
+viewport_path = NodePath("TextureRect2/SubViewport")
+
+[sub_resource type="Environment" id="Environment_qywvv"]
+background_mode = 1
+background_color = Color(0.58448, 0.41339996, 0.78, 1)
 
 [node name="Main Menu" type="Control" unique_id=303553077 node_paths=PackedStringArray("play_btn", "settings_btn", "announcer", "model", "settings_container")]
 layout_mode = 3
@@ -374,8 +381,14 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 567.0
+offset_top = 245.0
+offset_right = -431.0
+offset_bottom = -212.0
 grow_horizontal = 2
 grow_vertical = 2
+texture = SubResource("ViewportTexture_qywvv")
+expand_mode = 1
 
 [node name="SubViewport" type="SubViewport" parent="TextureRect2" unique_id=875993635]
 
@@ -397,6 +410,7 @@ mesh = ExtResource("24_vr8o3")
 
 [node name="Camera3D" type="Camera3D" parent="TextureRect2/SubViewport" unique_id=1635479807]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40.132908, 0, 12.419304)
+environment = SubResource("Environment_qywvv")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="TextureRect2/SubViewport" unique_id=792131772]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.97777, 0, 12.774757)
