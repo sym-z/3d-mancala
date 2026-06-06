@@ -218,8 +218,9 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_8ln24")
 
-[node name="Dummy Board" type="AnimatableBody3D" parent="." unique_id=1816434046]
+[node name="Dummy Board" type="AnimatableBody3D" parent="." unique_id=1816434046 node_paths=PackedStringArray("center_marker")]
 script = ExtResource("8_tbmy8")
+center_marker = NodePath("Spin Center")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Dummy Board" unique_id=1889421107]
 shape = SubResource("ConcavePolygonShape3D_8egab")
@@ -229,6 +230,9 @@ mesh = ExtResource("7_oa1go")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Dummy Board" unique_id=826986611]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.40843)
+
+[node name="Spin Center" type="Marker2D" parent="Dummy Board" unique_id=2114386258]
+position = Vector2(583, 514)
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=190764683]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.07167387, 13.897829)
@@ -339,6 +343,7 @@ theme = SubResource("Theme_a8gd2")
 text = "BACK"
 
 [node name="Control Window Container" type="MarginContainer" parent="." unique_id=626955649]
+visible = false
 z_index = 1
 layout_mode = 1
 anchors_preset = 15
@@ -371,13 +376,14 @@ theme_override_font_sizes/font_size = 64
 text = "CONTROLS"
 horizontal_alignment = 1
 
-[node name="Back" type="Button" parent="Control Window Container/PanelContainer2/VBoxContainer2" unique_id=1299686484]
+[node name="Back" type="Button" parent="Control Window Container/PanelContainer2/VBoxContainer2" unique_id=1299686484 node_paths=PackedStringArray("window")]
 material = SubResource("ShaderMaterial_j7ex8")
 layout_mode = 2
 size_flags_horizontal = 4
 theme = SubResource("Theme_a8gd2")
 text = "BACK"
 script = ExtResource("19_gw5y6")
+window = NodePath("../../..")
 
 [node name="Piece Cloud System" type="Node3D" parent="." unique_id=484099994]
 

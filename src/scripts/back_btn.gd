@@ -12,4 +12,4 @@ func _process(delta):
 	pass
 
 func hide_window():
-	visible = false
+	window.visible = false

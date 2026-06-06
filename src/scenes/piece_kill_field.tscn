@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://c0h2cfi6fa2bb" path="res://scenes/piece_kill_field.gd" id="1_bw5ku"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_bw5ku"]
-size = Vector3(337.72385, 2.1782227, 161.02338)
+size = Vector3(5000, 2.2, 5000)
 
 [node name="Piece Kill Field" type="Area3D" unique_id=837961527]
 script = ExtResource("1_bw5ku")
