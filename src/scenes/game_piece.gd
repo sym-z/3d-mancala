@@ -7,6 +7,9 @@ extends RigidBody3D
 @export var detection_field : Area3D
 @export var speaker : AudioStreamPlayer3D
 @export var drop_sounds : Array[AudioStreamMP3]
+
+@export var mute_audio : bool 
+
 var drop_sound_played : bool = false
 
 func _ready():
@@ -20,7 +23,7 @@ func _ready():
 	detection_field.connect("body_entered", collision)
 
 func collision(body : Node):
-	if  drop_sound_played == false and body != self:
+	if  drop_sound_played == false and body != self and !mute_audio:
 		play_random_drop_sound()
 		drop_sound_played = true
 

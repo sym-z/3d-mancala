@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://cnb7dhdev6qmw"]
+
+[ext_resource type="Script" uid="uid://cusckb2dd0pwj" path="res://scenes/piece_rain_cloud.gd" id="1_eugcg"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_eugcg"]
+size = Vector3(20, 1, 20)
+
+[node name="Piece Rain Cloud" type="Area3D" unique_id=449764169 node_paths=PackedStringArray("col_shape", "spawn_timer")]
+script = ExtResource("1_eugcg")
+col_shape = NodePath("CollisionShape3D")
+spawn_timer = NodePath("Timer")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=533565723]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8979492, 0, 0)
+shape = SubResource("BoxShape3D_eugcg")
+
+[node name="Timer" type="Timer" parent="." unique_id=796226676]

@@ -18,6 +18,8 @@
 [ext_resource type="AudioStream" uid="uid://48bqffl6eiyl" path="res://assets/audio/tie.mp3" id="15_8egab"]
 [ext_resource type="Theme" uid="uid://d2x1lp84g27xq" path="res://mm_menu_box.tres" id="16_5pajh"]
 [ext_resource type="Script" uid="uid://diakhf4xw6vll" path="res://scripts/settings_container.gd" id="16_j7ex8"]
+[ext_resource type="PackedScene" uid="uid://cnb7dhdev6qmw" path="res://scenes/piece_rain_cloud.tscn" id="19_hstxw"]
+[ext_resource type="PackedScene" uid="uid://bapav8muu0wfm" path="res://scenes/piece_kill_field.tscn" id="20_8egab"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tbmy8"]
 shader = ExtResource("4_5pajh")
@@ -316,6 +318,7 @@ size_flags_horizontal = 4
 min_value = -0.3
 max_value = 0.3
 step = 0.1
+value = -0.3
 
 [node name="Back" type="Button" parent="Settings Window Container/PanelContainer2/VBoxContainer2" unique_id=787669278]
 material = SubResource("ShaderMaterial_j7ex8")
@@ -323,3 +326,41 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme = SubResource("Theme_a8gd2")
 text = "BACK"
+
+[node name="Piece Cloud System" type="Node3D" parent="." unique_id=484099994]
+
+[node name="Clouds" type="Node3D" parent="Piece Cloud System" unique_id=1160482867]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.738647, 0)
+
+[node name="Piece Rain Cloud" parent="Piece Cloud System/Clouds" unique_id=2039727774 instance=ExtResource("19_hstxw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.334734, 5.2581654, 8.056681)
+
+[node name="Piece Rain Cloud2" parent="Piece Cloud System/Clouds" unique_id=776936635 instance=ExtResource("19_hstxw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.9394617, 5.2581654, 8.056681)
+
+[node name="Piece Rain Cloud3" parent="Piece Cloud System/Clouds" unique_id=880644579 instance=ExtResource("19_hstxw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.2581654, 10.0109215)
+
+[node name="Piece Rain Cloud4" parent="Piece Cloud System/Clouds" unique_id=444475372 instance=ExtResource("19_hstxw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.2581654, 4.005579)
+
+[node name="Piece Rain Cloud5" parent="Piece Cloud System/Clouds" unique_id=559232422 instance=ExtResource("19_hstxw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.258165, 8.056681)
+
+[node name="Piece Rain Cloud6" parent="Piece Cloud System/Clouds" unique_id=1808252922 instance=ExtResource("19_hstxw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9737911, 5.2581644, 8.972935)
+
+[node name="Piece Rain Cloud7" parent="Piece Cloud System/Clouds" unique_id=449764169 instance=ExtResource("19_hstxw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7299991, 5.2581635, 6.6481705)
+
+[node name="Piece Rain Cloud8" parent="Piece Cloud System/Clouds" unique_id=248883227 instance=ExtResource("19_hstxw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0272121, 5.2581654, 7.9339256)
+
+[node name="Piece Rain Cloud9" parent="Piece Cloud System/Clouds" unique_id=2101750914 instance=ExtResource("19_hstxw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3357882, 5.2581663, 11.575093)
+
+[node name="Piece Rain Cloud10" parent="Piece Cloud System/Clouds" unique_id=1980058987 instance=ExtResource("19_hstxw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.004303, 5.2581663, 9.581148)
+
+[node name="Piece Kill Field" parent="Piece Cloud System" unique_id=837961527 instance=ExtResource("20_8egab")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -113.04147, 0)
