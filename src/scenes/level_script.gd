@@ -188,6 +188,7 @@ func move_to_home(banks : Array[Marker3D], home : Marker3D):
 			bank.bank_updated.emit()
 			await get_tree().create_timer(spread_delay).timeout
 		bank.set_manual.emit(0)
+	await get_tree().create_timer(spread_delay).timeout
 
 func check_winner():
 	if p1_marker_home.get_child_count() == p2_marker_home.get_child_count():
