@@ -16,7 +16,5 @@ func _input(event):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
-	print(screen_center)
-	#print(mouse_pos.distance_to(screen_center)*0.05)
-	speed = 1. + mouse_pos.distance_to(screen_center)*0.005
+	speed = 1. + mouse_pos.distance_to(screen_center)*0.008
 	rotate(Vector3(0,1,0), speed*delta)

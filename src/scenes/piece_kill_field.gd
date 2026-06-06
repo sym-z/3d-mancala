@@ -14,4 +14,3 @@ func _process(delta):
 func kill_piece(body: Node3D):
 	if body is RigidBody3D:
 		body.call_deferred("queue_free")
-		print("killed")

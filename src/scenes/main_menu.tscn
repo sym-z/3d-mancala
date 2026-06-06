@@ -20,7 +20,10 @@
 [ext_resource type="Script" uid="uid://diakhf4xw6vll" path="res://scripts/settings_container.gd" id="16_j7ex8"]
 [ext_resource type="Script" uid="uid://m3wdetowhhdx" path="res://scripts/back_btn.gd" id="19_gw5y6"]
 [ext_resource type="PackedScene" uid="uid://cnb7dhdev6qmw" path="res://scenes/piece_rain_cloud.tscn" id="19_hstxw"]
+[ext_resource type="Texture2D" uid="uid://73tqm3m4tpvp" path="res://assets/sprites/rotoscoped_keys/arrows1_edit.png" id="19_svtp6"]
 [ext_resource type="PackedScene" uid="uid://bapav8muu0wfm" path="res://scenes/piece_kill_field.tscn" id="20_8egab"]
+[ext_resource type="Texture2D" uid="uid://ry2md4x0derv" path="res://assets/sprites/rotoscoped_keys/space1_edit.png" id="20_qywvv"]
+[ext_resource type="Texture2D" uid="uid://l4vd3hpfl8j3" path="res://assets/sprites/rotoscoped_keys/s2_edit.png" id="21_3wgol"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tbmy8"]
 shader = ExtResource("4_5pajh")
@@ -351,10 +354,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 281
-theme_override_constants/margin_top = 123
-theme_override_constants/margin_right = 281
-theme_override_constants/margin_bottom = 123
+theme_override_constants/margin_left = 145
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 145
+theme_override_constants/margin_bottom = 32
 
 [node name="PanelContainer2" type="PanelContainer" parent="Control Window Container" unique_id=1735921788]
 layout_mode = 2
@@ -366,7 +369,8 @@ theme_override_constants/separation = 28
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control Window Container/PanelContainer2/VBoxContainer2" unique_id=1367705314]
 layout_mode = 2
-theme_override_constants/separation = 1
+theme_override_constants/separation = 6
+alignment = 1
 
 [node name="Label" type="Label" parent="Control Window Container/PanelContainer2/VBoxContainer2/VBoxContainer" unique_id=384374167]
 layout_mode = 2
@@ -374,6 +378,63 @@ theme_override_constants/outline_size = 8
 theme_override_fonts/font = ExtResource("3_8ln24")
 theme_override_font_sizes/font_size = 64
 text = "CONTROLS"
+horizontal_alignment = 1
+
+[node name="Movement" type="HBoxContainer" parent="Control Window Container/PanelContainer2/VBoxContainer2/VBoxContainer" unique_id=87331946]
+layout_mode = 2
+theme_override_constants/separation = 64
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Control Window Container/PanelContainer2/VBoxContainer2/VBoxContainer/Movement" unique_id=123679447]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+texture = ExtResource("19_svtp6")
+expand_mode = 3
+
+[node name="Label" type="Label" parent="Control Window Container/PanelContainer2/VBoxContainer2/VBoxContainer/Movement" unique_id=1471359454]
+layout_mode = 2
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("3_8ln24")
+theme_override_font_sizes/font_size = 32
+text = "CHANGE SELECTION"
+horizontal_alignment = 1
+
+[node name="Selection" type="HBoxContainer" parent="Control Window Container/PanelContainer2/VBoxContainer2/VBoxContainer" unique_id=39549908]
+layout_mode = 2
+theme_override_constants/separation = 64
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Control Window Container/PanelContainer2/VBoxContainer2/VBoxContainer/Selection" unique_id=1866495199]
+custom_minimum_size = Vector2(128, 95)
+layout_mode = 2
+texture = ExtResource("20_qywvv")
+expand_mode = 3
+
+[node name="Label" type="Label" parent="Control Window Container/PanelContainer2/VBoxContainer2/VBoxContainer/Selection" unique_id=939742724]
+layout_mode = 2
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("3_8ln24")
+theme_override_font_sizes/font_size = 32
+text = "MAKE SELECTION"
+horizontal_alignment = 1
+
+[node name="Slam" type="HBoxContainer" parent="Control Window Container/PanelContainer2/VBoxContainer2/VBoxContainer" unique_id=1716964406]
+layout_mode = 2
+theme_override_constants/separation = 64
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Control Window Container/PanelContainer2/VBoxContainer2/VBoxContainer/Slam" unique_id=1705581665]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture = ExtResource("21_3wgol")
+expand_mode = 3
+
+[node name="Label" type="Label" parent="Control Window Container/PanelContainer2/VBoxContainer2/VBoxContainer/Slam" unique_id=1053129302]
+layout_mode = 2
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("3_8ln24")
+theme_override_font_sizes/font_size = 32
+text = "SLAM BOARD"
 horizontal_alignment = 1
 
 [node name="Back" type="Button" parent="Control Window Container/PanelContainer2/VBoxContainer2" unique_id=1299686484 node_paths=PackedStringArray("window")]
