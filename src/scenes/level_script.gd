@@ -95,7 +95,6 @@ func _input(event):
 		board.can_slam = false
 
 func move_left():
-	#TODO: Check turn
 		if selected_bank == 0:
 			selected_bank = NUM_BANKS - 1
 		else:
@@ -103,7 +102,6 @@ func move_left():
 		set_selection(selected_bank)
 
 func move_right():
-	#TODO: Check turn
 		if selected_bank == NUM_BANKS-1:
 			selected_bank = 0
 		else:
@@ -116,18 +114,18 @@ func set_selection(bank_num : int):
 	else:
 		arrow_pointer.global_position = p2_marker_banks[bank_num].global_position
 
-func slam():
-	var force = 10.
-	for piece in p1_marker_home.get_children():
-		piece.apply_impulse(Vector3(randf_range(0.0,1.0),randf_range(0.0,1.0),randf_range(0.0,1.0)) * force)
-	for piece in p2_marker_home.get_children():
-		piece.apply_impulse(Vector3(randf_range(0.0,1.0),randf_range(0.0,1.0),randf_range(0.0,1.0)) * force)
+#DEPRECATED
+#func slam():
+	#var force = 10.
+	#for piece in p1_marker_home.get_children():
+		#piece.apply_impulse(Vector3(randf_range(0.0,1.0),randf_range(0.0,1.0),randf_range(0.0,1.0)) * force)
+	#for piece in p2_marker_home.get_children():
+		#piece.apply_impulse(Vector3(randf_range(0.0,1.0),randf_range(0.0,1.0),randf_range(0.0,1.0)) * force)
 
 #endregion
 #region Game State Modification
 func swap_turn():
 	await get_tree().create_timer(spread_delay * 2).timeout
-	#TODO: CHECK GAME STATE END
 	await check_endgame()
 	if curr_turn == TURN.ONE:
 		curr_turn = TURN.TWO
@@ -167,7 +165,6 @@ func check_endgame():
 		check_winner()
 		game_over.emit(p1_win, p2_win)
 		# End Game
-		#TODO: Win behavior
 
 func get_p1_total_pieces() -> int:
 	var total : int = 0
