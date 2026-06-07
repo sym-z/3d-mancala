@@ -28,7 +28,7 @@ func _process(delta):
 	pass
 
 func to_game():
-	model.visible = false
+	#model.visible = false
 	var tween : Tween = get_tree().create_tween()
 	tween.tween_property(self,"modulate", Color(0,0,0,1), fade_time)
 	tween.play()
