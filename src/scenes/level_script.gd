@@ -1,5 +1,6 @@
 extends Node3D
 #region Exports, Variables, Signals
+@export var board : AnimatableBody3D
 @export_category("Markers")
 @export_subgroup("Banks")
 @export var p1_marker_banks : Array[Marker3D]
@@ -47,7 +48,6 @@ signal game_over(p1_win : bool, p2_win : bool)
 #endregion
 func _ready():
 	spread_delay = Globals.game_speed
-	print("SPREAD DELAY IS: ", spread_delay)
 	arrow_pointer.global_position = p1_marker_banks[selected_bank].global_position
 	arrow_pointer.visible = false
 	await board_setup()
@@ -89,7 +89,10 @@ func _input(event):
 	
 	if event.is_action_pressed("slam"):
 		if p1_win or p2_win:
-			slam()
+			#slam()
+			board.can_slam = true
+	elif event.is_action_released("slam"):
+		board.can_slam = false
 
 func move_left():
 	#TODO: Check turn
@@ -312,7 +315,7 @@ func capture_check(bank : Marker3D, index : int):
 		bank.set_manual.emit(0)
 		await get_tree().create_timer(spread_delay/2).timeout
 #endregion
-
+#region Camera Controls
 var tween : Tween = null
 func tween_camera(pos: Vector3, duration):
 	tween = get_tree().create_tween()
@@ -328,3 +331,4 @@ func reset_camera():
 func tween_kill():
 	await tween.finished
 	tween.kill()
+#endregion

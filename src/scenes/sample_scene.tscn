@@ -98,8 +98,9 @@ shader_parameter/strength = 5.0
 shader = ExtResource("9_x320b")
 shader_parameter/strength = 5.0
 
-[node name="Sample Level" type="Node3D" unique_id=202412583 node_paths=PackedStringArray("p1_marker_banks", "p2_marker_banks", "p1_marker_home", "p2_marker_home", "arrow_pointer", "announcer", "p1_cam", "p2_cam")]
+[node name="Sample Level" type="Node3D" unique_id=202412583 node_paths=PackedStringArray("board", "p1_marker_banks", "p2_marker_banks", "p1_marker_home", "p2_marker_home", "arrow_pointer", "announcer", "p1_cam", "p2_cam")]
 script = ExtResource("1_jddra")
+board = NodePath("New Board")
 p1_marker_banks = [NodePath("Placement Markers/P1_1"), NodePath("Placement Markers/P1_2"), NodePath("Placement Markers/P1_3"), NodePath("Placement Markers/P1_4"), NodePath("Placement Markers/P1_5"), NodePath("Placement Markers/P1_6")]
 p2_marker_banks = [NodePath("Placement Markers/P2_1"), NodePath("Placement Markers/P2_2"), NodePath("Placement Markers/P2_3"), NodePath("Placement Markers/P2_4"), NodePath("Placement Markers/P2_5"), NodePath("Placement Markers/P2_6")]
 p1_marker_home = NodePath("Placement Markers/P1_H")
@@ -109,8 +110,9 @@ announcer = NodePath("Announcer")
 p1_cam = NodePath("P1 Cam")
 p2_cam = NodePath("P2 Cam")
 
-[node name="New Board" parent="." unique_id=182566537 instance=ExtResource("3_l4noq")]
+[node name="New Board" parent="." unique_id=182566537 node_paths=PackedStringArray("level") instance=ExtResource("3_l4noq")]
 transform = Transform3D(0.38, 0, 0, 0, -1.6610327e-08, 0.38, 0, -0.38, -1.6610327e-08, 0, -0.2214489, 0)
+level = NodePath("..")
 
 [node name="Walls" type="Node3D" parent="." unique_id=1160151810]
 visible = false
@@ -433,7 +435,7 @@ layout_mode = 2
 theme_override_constants/outline_size = 8
 theme_override_fonts/font = ExtResource("8_udu4s")
 theme_override_font_sizes/font_size = 98
-text = "(S) SLAM BOARD"
+text = "(S) FLIP BOARD"
 horizontal_alignment = 1
 
 [node name="Menu Button" type="Button" parent="CanvasLayer/Control/Post Game Messages/VBoxContainer" unique_id=1612836393]

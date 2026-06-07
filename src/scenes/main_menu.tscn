@@ -121,7 +121,7 @@ Button/styles/hover = SubResource("StyleBoxFlat_q6mj1")
 Button/styles/normal = SubResource("StyleBoxFlat_7dv2h")
 Button/styles/pressed = SubResource("StyleBoxFlat_5vu20")
 
-[node name="Main Menu" type="Control" unique_id=303553077 node_paths=PackedStringArray("play_btn", "settings_btn", "controls_btn", "announcer", "model", "settings_container", "controls_container")]
+[node name="Main Menu" type="Control" unique_id=303553077 node_paths=PackedStringArray("play_btn", "settings_btn", "controls_btn", "announcer", "model", "settings_container", "controls_container", "scene_light")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -138,6 +138,7 @@ fade_time = 0.5
 model = NodePath("Dummy Board/MeshInstance3D")
 settings_container = NodePath("Settings Window Container")
 controls_container = NodePath("Control Window Container")
+scene_light = NodePath("Dummy Board/DirectionalLight3D")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1088503036]
 modulate = Color(1, 1, 1, 0.39215687)
@@ -434,7 +435,7 @@ layout_mode = 2
 theme_override_constants/outline_size = 5
 theme_override_fonts/font = ExtResource("3_8ln24")
 theme_override_font_sizes/font_size = 32
-text = "SLAM BOARD"
+text = "FLIP BOARD"
 horizontal_alignment = 1
 
 [node name="Back" type="Button" parent="Control Window Container/PanelContainer2/VBoxContainer2" unique_id=1299686484 node_paths=PackedStringArray("window")]
