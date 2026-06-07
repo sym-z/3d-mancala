@@ -393,7 +393,6 @@ horizontal_alignment = 1
 uppercase = true
 script = ExtResource("11_kg8jk")
 level = NodePath("../../..")
-view_duration = 0.75
 
 [node name="Win Container" type="CenterContainer" parent="CanvasLayer/Control" unique_id=1379378633]
 layout_mode = 1
