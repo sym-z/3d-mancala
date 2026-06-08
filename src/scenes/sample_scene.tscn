@@ -69,10 +69,10 @@ sky_material = SubResource("ShaderMaterial_vftan")
 [sub_resource type="Environment" id="Environment_xur8e"]
 background_mode = 2
 background_color = Color(0.2627451, 0, 0, 1)
+background_energy_multiplier = 6.0
 sky = SubResource("Sky_k603i")
+ambient_light_color = Color(0, 0, 0, 0)
 ambient_light_sky_contribution = 0.0
-ambient_light_energy = 0.0
-reflected_light_source = 1
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_oiwk8"]
 shader = ExtResource("9_x320b")
@@ -185,6 +185,7 @@ environment = SubResource("Environment_xur8e")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1660986940]
 transform = Transform3D(1, 0, 0, 0, 0.12663184, 0.9919498, 0, -0.9919498, 0.12663184, 0, 1.777168, 0)
+light_volumetric_fog_energy = 0.0
 
 [node name="Placement Markers" type="Node3D" parent="." unique_id=22633479]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.51, 0)
@@ -447,6 +448,7 @@ text = "BACK TO MENU?"
 [node name="Announcer" type="AudioStreamPlayer" parent="." unique_id=540410151]
 stream = ExtResource("15_x320b")
 bus = &"announcer"
+playback_type = 1
 script = ExtResource("15_e351d")
 streams = Dictionary[String, AudioStreamMP3]({
 "capture": ExtResource("15_6yaw1"),

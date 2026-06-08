@@ -245,6 +245,7 @@ environment = SubResource("Environment_7b55j")
 [node name="Announcer" type="AudioStreamPlayer" parent="." unique_id=1153770920]
 stream = ExtResource("9_7b55j")
 bus = &"announcer"
+playback_type = 1
 script = ExtResource("9_jk1qb")
 streams = Dictionary[String, AudioStreamMP3]({
 "capture": ExtResource("11_5pajh"),
