@@ -414,7 +414,7 @@ script = ExtResource("13_oiwk8")
 level = NodePath("../../../..")
 post_game_messages = NodePath("../../Post Game Messages")
 
-[node name="Post Game Messages" type="CenterContainer" parent="CanvasLayer/Control" unique_id=1684606117 node_paths=PackedStringArray("menu_btn")]
+[node name="Post Game Messages" type="CenterContainer" parent="CanvasLayer/Control" unique_id=1684606117 node_paths=PackedStringArray("level", "menu_btn")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -422,6 +422,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("16_g2i3f")
+level = NodePath("../../..")
 menu_btn = NodePath("VBoxContainer/Menu Button")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/Post Game Messages" unique_id=1644753566]

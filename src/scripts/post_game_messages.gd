@@ -1,5 +1,5 @@
 extends CenterContainer
-
+@export var level : Node3D
 @export var menu_btn : Button 
 @export var fade_time : float = 0.3
 func _ready():
@@ -12,4 +12,5 @@ func reveal():
 	tween.play()
 	
 func to_menu():
-	SceneTransition.main_menu()
+	if level.p1_win or level.p2_win: 
+		SceneTransition.main_menu()
